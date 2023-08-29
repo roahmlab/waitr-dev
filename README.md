@@ -1,13 +1,13 @@
 ![](https://github.com/roahmlab/armour-dev/blob/main/assets/armour_logo.png?raw=true)
 
 # Autonomous Robust Manipulation via Optimization with Uncertainty-aware Reachability
-**Authors:** Jonathan Michaux (jmichaux@umich.edu), Patrick Holmes (pdholmes@umich.edu), Bohao Zhang (jimzhang@umich.edu), Che Chen (cctom@umich.edu), Baiyue Wang (baiyuew@umich.edu), Shrey Sahgal (shreyps@umich.edu), Tiancheng Zhang (zhangtc@umich.edu), Sidhartha Dey (sid.dey@agilityrobotics.com), Shreyas Kousik (skousik@gatech.edu), and Ram Vasudevan (ramv@umich.edu). 
+**Authors:** Zachary Brei (breizach@umich.edu), Jonathan Michaux (jmichaux@umich.edu), Patrick Holmes (pdholmes@umich.edu), Bohao Zhang (jimzhang@umich.edu), and Ram Vasudevan (ramv@umich.edu). 
 
-- All authors are affiliated with the Robotics Institute and department of Mechanical Engineering of the University of Michigan, 2505 Hayward Street, Ann Arbor, Michigan, USA (TODO: include Shreyas and Sid).
-- This work is supported by the Ford Motor Company via the Ford-UM Alliance under award N022977, National Science Foundation Career Award 1751093 and by the Office of Naval Research under Award Number N00014-18-1-2575.
-- `ARMOUR` was developed in [Robotics and Optimization for Analysis of Human Motion (ROAHM) Lab](http://www.roahmlab.com/) at University of Michigan - Ann Arbor.
+- All authors are affiliated with the department of Mechanical Engineering and department of Robotics of the University of Michigan, 2505 Hayward Street, Ann Arbor, Michigan, USA.
+- This work is supported by ...
+- `WAITR` was developed in [Robotics and Optimization for Analysis of Human Motion (ROAHM) Lab](http://www.roahmlab.com/) at University of Michigan - Ann Arbor.
 
-## Introduction (TODO: I just put abstract here for now)
+## Introduction (TODO: update to WAITR Abstract)
 A key challenge to the widespread deployment of robotic manipulators is the need to ensure safety in arbitrary environments while generating new motion plans in real-time.
 In particular, one must ensure that the manipulator does not collide with obstacles, collide with itself, or exceed its own joint torque limits.
 This challenge is compounded by the need to account for uncertainty in the mass and inertia of manipulated objects, and potentially the robot itself.
@@ -81,6 +81,8 @@ Run
  - kinova_src/initialize.m
  
 in MATLAB before you run any other scripts!
+
+## add what to do in case of error during initialize.m?
 
 ## Usage
 Before running any scripts, make sure you run the initalization scripts successfully and put the Ipopt libraries in the proper path.
