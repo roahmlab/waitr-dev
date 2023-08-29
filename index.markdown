@@ -61,28 +61,52 @@ links:
 {% include sections/authors %}
 {% include sections/links %}
 
-# Section Break
 ---
 
-# As you can see, the authors and link are just includes
+# Abstract
 
-In other words, I can actually move them wherever I want, or place them here again.
-The data is provided by the front matter.
-Let's try flipping the order.
-
-{% include sections/links %}
-{% include sections/authors %}
+A key challenge to ensuring the rapid transition
+of robotic systems from the industrial sector to more ubiq-
+uitous applications is the development of algorithms that can
+guarantee safe operation while in close proximity to humans.
+Motion planning and control methods, for instance, must be
+able to certify safety while operating in real-time in arbitrary
+environments and in the presence of model uncertainty. This
+paper proposes Wrench Analysis for Inertial Transport using
+Reachability (WAITR), a certifiably safe motion planning and
+control framework for serial link manipulators that manipulate
+unsecured objects in arbitrary environments. WAITR uses reach-
+ability analysis to construct over-approximations of the contact
+wrench applied to unsecured objects, which captures uncertainty
+in the manipulator dynamics, the object dynamics, and contact
+parameters such as the coefficient of friction. An optimization
+problem formulation is presented that can be solved in real-time
+to generate provably-safe motions for manipulating the unsecured
+objects. This paper illustrates that WAITR outperforms state
+of the art methods in a variety of simulation experiments and
+demonstrates its performance in the real-world.
 
 ---
 
-There is quite a bit of flexibility to how you structure the text too.
-Here, I'm going to make a justified grey content block with the heading outside.
-
-# [Content](#content)
+# [Method](#content)
 <div markdown="1" class="content-block grey justify no-pre">
-some text
+  
+This paper considers the problem of safe motion planning for manip-
+ulation of unsecured objects with uncertain dynamics such as manipulating an
+unsecured cup filled with an uncertain mass around randomly placed obstacles
+(red) such that the cup does not move relative to the tray supporting it. WAITR
+operates in receding-horizon fashion, moving from a start configuration (blue)
+to a global goal (green) by repeatedly generating new motion plans in real-
+time. In each motion planning iteration, WAITR calculates a reachable set
+(blue and purple) for the contact wrench between the manipulator and the
+object as well as a Forward Reachable Set (FRS) for the whole manipulator
+system for a continuum of possible motion plans. The FRS is shown in purple
+in a) for a single planning iteration. WAITR solves a constrained trajectory
+optimization problem to find a collision-free motion in this FRS that does
+not result in relative motion while making progress towards an intermediate
+waypoint (grey) and the global goal. Parts c)-e) show the contact constraints
+enforced during a hardware experiment for a single planning iteration.
 
-Try clicking this heading, this shows the manually defined header anchor, but if you do this, you should do it for all headings.
 </div>
 
 I made this look right by adding the `no-pre` class.
