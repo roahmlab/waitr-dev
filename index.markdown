@@ -1,13 +1,13 @@
 ---
 # Front matter. This is where you specify a lot of page variables.
 layout: default
-title:  "Example Page"
+title:  "WAITR"
 date:   2023-06-16 03:03:01 -0400
 description: >- # Supports markdown
-  This is the main project page and the page used to demonstrate how this works with all of the options for the Front Matter present
+  Wrench Analysis for Inertial Transport using Reachability
 show-description: true
 
-# Add page-specifi mathjax functionality. Manage global setting in _config.yml
+# Add page-specific mathjax functionality. Manage global setting in _config.yml
 mathjax: true
 # Automatically add permalinks to all headings
 # https://github.com/allejo/jekyll-anchor-headings
@@ -22,46 +22,38 @@ image:
 
 # Only the first author is supported by twitter metadata
 authors:
-  - name: Someone
+  - name: Zachary Brei
+    email: breizach@umich.edu
     footnotes: 1
-  - name: Adam Li
-    url: https://buildingatom.io
-    email: person [at] example.edu
-    mailto: person@example.edu
+  - name: Jonathon Michaux
+    # url: https://buildingatom.io
+    email: jmichaux@umich.edu
     footnotes: 2
-  - name: Person 3
-    email: someemail@example.com
-    footnotes: 3
-  - name: Guy 4
-    mailto: combined@example.com
-    footnotes: 3
-  - name: Another Person
+  - name: Bohao Zhang
+    email: jimzhang@umich.edu
+    footnotes: 2
+  - name: Patrick Holmes
+    footnotes: 2
+  - name: Ram Vasudevan
+    email: ramv@umich.edu
+    footnotes: 2
 
 # If you just want a general footnote, you can do that too.
 # See the sel_map and armour-dev examples.
 author-footnotes:
   1: >- # Supports markdown
-    You can add random extra footnotes
-  2: And include websites or emails which are detached from their mailto
-  3: You can also just specify the email and not have a mailto, or if there's a mailto you want to use, you can specify only that
-
+    Mechanical Engineering, UofM
+  2: Robotics, UofM
+  
 links:
   - icon: arxiv
     icon-library: simpleicons
     text: Arxiv HP
     url: https://arxiv.org/
-  - icon: bi-map
-    icon-library: bootstrap-icons
-    text: SEL_Map Ex.
-    url: /project-pages/sel_map
-  - icon: bi-bezier2
-    icon-library: bootstrap-icons
-    text: ARMOUR Ex.
-    url: /project-pages/armour-dev
   - icon: github
     icon-library: simpleicons
     text: Code
-    url: https://github.com/BuildingAtom/project-pages
+    url: https://github.com/roahmlab/waitr-dev
 
 # End Front Matter
 ---
