@@ -469,6 +469,11 @@ classdef uarmtd_planner < robot_arm_generic_planner
 
                 % iterate through all of the time steps
                 
+                % !depends on robot urdf!
+                contact_joint = 10;
+                fprintf('Treating Joint %d as the Contact Joint \n', contact_joint);
+
+
                 parfor i = 1:jrs_info.n_t
                     
                     % only checking one contact joint (for now)
@@ -488,8 +493,8 @@ classdef uarmtd_planner < robot_arm_generic_planner
         
                     % extract relevant polyzonotope from f_int{i,1}
                     % !depends on robot urdf!
-                    fprintf('Treating Joint 10 as the Contact Joint \n');
-                    contact_poly = f_int{i,1}{10};
+%                     fprintf('Treating Joint %d as the Contact Joint \n', contact_joint);
+                    contact_poly = f_int{i,1}{contact_joint};
 
                     
                     % create individual force polyzonotopes
@@ -833,8 +838,8 @@ classdef uarmtd_planner < robot_arm_generic_planner
 
             initial_guess = zeros(n_k,1); % rand_range(lb, ub);
            
-            options = optimoptions('fmincon','SpecifyConstraintGradient',true,'SpecifyObjectiveGradient',true,'CheckGradients',true);
-%             options = optimoptions('fmincon','SpecifyConstraintGradient',true, 'CheckGradients', true);
+%             options = optimoptions('fmincon','SpecifyConstraintGradient',true,'SpecifyObjectiveGradient',true,'CheckGradients',true);
+            options = optimoptions('fmincon','SpecifyConstraintGradient',true);
             [k_opt, ~, exitflag, ~] = fmincon(cost_func, initial_guess, [], [], [], [], lb, ub, constraint_func, options) ;
             
             fprintf('k_opt: ')
@@ -843,7 +848,8 @@ classdef uarmtd_planner < robot_arm_generic_planner
             trajopt_failed = exitflag <= 0 ;
         end
         
-        function [cost,grad_cost] = eval_cost(P, A, k, q_0, q_dot_0, q_ddot_0, q_des)
+        function [cost] = eval_cost(P, A, k, q_0, q_dot_0, q_ddot_0, q_des)
+            % grad_cost
             if P.use_q_plan_for_cost
                 q_plan = P.desired_trajectory(q_0, q_dot_0, q_ddot_0, P.t_plan, k);
                 cost = sum((q_plan - q_des).^2);
