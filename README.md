@@ -1,6 +1,6 @@
 ![](https://github.com/roahmlab/armour-dev/blob/main/assets/armour_logo.png?raw=true)
 
-# Autonomous Robust Manipulation via Optimization with Uncertainty-aware Reachability
+# Wrench Analysis for Inertial Transport using Reachability
 **Authors:** Zachary Brei (breizach@umich.edu), Jonathan Michaux (jmichaux@umich.edu), Patrick Holmes (pdholmes@umich.edu), Bohao Zhang (jimzhang@umich.edu), and Ram Vasudevan (ramv@umich.edu). 
 
 - All authors are affiliated with the department of Mechanical Engineering and department of Robotics of the University of Michigan, 2505 Hayward Street, Ann Arbor, Michigan, USA.
