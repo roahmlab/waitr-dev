@@ -41,7 +41,7 @@ footer:
     sites:
       - text: Github Code
         href: https://github.com/roahmlab/waitr-dev
-        icon: github
+        icon: bi-github
         icon-library: bootstrap-icons
       # - text: SEL Map Example
       #   href: /project-pages/sel_map
