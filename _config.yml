@@ -31,7 +31,7 @@ credit:
 show-credit: false
 
 # Disable the footer by just setting the above false AND making the below blank
-# footer:
+footer:
 #   connections-pre: Github: # This prefixes the connections section at the botom.
 #   connections-post: 
 #   connections:
