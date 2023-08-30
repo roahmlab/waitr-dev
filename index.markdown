@@ -13,15 +13,6 @@ mathjax: true
 # https://github.com/allejo/jekyll-anchor-headings
 autoanchor: true
 
-<!--
-# Preview image for social media cards
-image:
-  path: https://cdn.pixabay.com/photo/2019/09/05/01/11/mountainous-landscape-4452844_1280.jpg
-  height: 100
-  width: 256
-  alt: Random Landscape
--->
-
 authors:
   - name: Zachary Brei
     email: breizach@umich.edu
