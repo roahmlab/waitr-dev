@@ -90,6 +90,14 @@ Parts c)-e) show the contact constraints enforced during a hardware experiment f
 # Simulation Results
 <div markdown="1" class="content-block grey justify no-pre">
 
+Example of a failure due to contact constrainst being turned off:
+<div class="fullwidth">
+<video controls="" width="100%">
+    <source src="fetch_tray_fail.mkv">
+</video>
+</div>
+
+Example of a success:
 <div class="fullwidth">
 <video controls="" width="100%">
     <source src="fetch_tray_fail.mkv">
