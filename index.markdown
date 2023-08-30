@@ -57,7 +57,7 @@ links:
 
 ---
 
-# Overview Video
+# Overview Video (add link to youtube video)
 <div class="fullwidth">
 <video controls="" style="background-color:black;width:100%;height:auto;aspect-ratio:16/9;"></video>
 </div>
@@ -85,60 +85,20 @@ Parts c)-e) show the contact constraints enforced during a hardware experiment f
 
 </div>
 
-<div markdown="1" class="content-block grey justify">
-# Topic inside of the content block
+---
 
-Lorem ipsum dolor sit amet Consectetur adipiscing elit Integer molestie lorem at massa.
+# Simulation Results
+<div markdown="1" class="content-block grey justify no-pre">
 
-![Alt Text](https://cdn.pixabay.com/photo/2019/09/05/01/11/mountainous-landscape-4452844_1280.jpg "Random Image")
+<div class="fullwidth">
+<video controls="" width="100%">
+    <source src="https://user-images.githubusercontent.com/13129304/160706120-fc7aa07b-84d0-4dc2-9630-8289401880d8.mp4">
+</video>
+</div>
+  
 </div>
 
-# Topic outside of content block
-
-![Alt Text](https://cdn.pixabay.com/photo/2019/09/05/01/11/mountainous-landscape-4452844_1280.jpg "Random Image")
-
-Lorem ipsum dolor sit amet Consectetur adipiscing elit Integer molestie lorem at massa.
-
-## This is how we can get the image at 100%
-
-<div markdown="1" class="fullwidth">
-![Alt Text](https://cdn.pixabay.com/photo/2019/09/05/01/11/mountainous-landscape-4452844_1280.jpg "Random Image")
-</div>
-
-## And this is how we can get the image closer
-
-<div markdown="1" class="no-pre">
-![Alt Text](https://cdn.pixabay.com/photo/2019/09/05/01/11/mountainous-landscape-4452844_1280.jpg "Random Image")
-</div>
-
-Lorem ipsum dolor sit amet Consectetur adipiscing elit Integer molestie lorem at massa.
-
-<div markdown="1" class="cabin">
-It's also possible to specify a new font for a specific section
-</div>
-
-<div markdown="1" class="jp">
-## See? 1
-</div>
-
-And you can also <span class="cabin">change it in the middle</span>, though that's a bit more problematic for other reasons.
-
-To specify fonts, just use Google Fonts and update `_data/fonts.yml`.
-Any fonts you add as extra fonts at the bottom become usable fonts in the body of the post.
-
-There are also tools to grab icons from other repos.
-Just use the following:
-{% include util/icons icon='github' icon-library='simpleicons' -%}
-, and you'll be able to add icons from any library you have enabled that is supported.
-
-This uses the liquid template engine for importing.
-If you include the - at the start of end of such a line, it say to discard all whitespace before or after.
-In order to keep the comma there, we added the -.
-This is what happens:
-{% include util/icons icon='github' icon-library='simpleicons' %}
-, when you don't have it (notice the space).
-
-And if you have mathjax enabled in `_config.yml` or in the Front Matter as it is here, you can even add latex:
+---
 
 $$
 \begin{align*}
@@ -156,19 +116,6 @@ $$
     \end{array} \right)
 \end{align*}
 $$
-
-You can also treat a section of text as a block, and use kramdown's block attribution methods to change fonts.
-You can see at the end of this section in the markdown that I do just that
-{: class="cabin"}
-
-<!--
-<div markdown="1" class="content-block grey justify">
-# This is a really long heading block so I can see if justify breaks the heading, and make sure that headings don't get justify unless they are explicitly classed with justify like the following heading
-
-# This is the following really long heading block so I can see if justify breaks the heading, and make sure that only this heading is justified because it has the explicit tag
-{: class="justify"}
-</div> 
--->
 
 <div markdown="1" class="content-block grey justify">
 # Citation
