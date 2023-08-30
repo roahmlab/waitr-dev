@@ -90,7 +90,7 @@ Parts c)-e) show the contact constraints enforced during a hardware experiment f
 # Simulation Results
 <div markdown="1" class="content-block grey justify no-pre">
 
-Example of a failure due to contact constrainst being turned off:
+Example of a failure due to contact constrainsts being turned off:
 <div class="fullwidth">
 <video controls="" width="100%">
     <source src="fetch_tray_fail.mkv">
@@ -104,6 +104,20 @@ Example of a success:
 </video>
 </div>
   
+</div>
+
+---
+
+# Hardware Results
+<div markdown="1" class="content-block grey justify no-pre">
+
+Video first shows an example of a failure due to contact constrainsts being turned off, then it shows a success when contact constraints are turned on. Both scenarios use the same global start and goal, as well as the same naive high level planner.
+<div class="fullwidth">
+<video controls="" width="100%">
+    <source src="force_closure_720.mp4">
+</video>
+</div>
+
 </div>
 
 ---
