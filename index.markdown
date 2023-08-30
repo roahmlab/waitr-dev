@@ -31,7 +31,7 @@ authors:
     # footnotes: 2
 
 author-footnotes:
-  All authors affiliated with the Robotics Institute and department of Mechanical Engineering of the University of Michigan, Ann Arbor.
+  All authors affiliated with the department of Mechanical Engineering and Department of Robotics of the University of Michigan, Ann Arbor.
   
   
 links:
@@ -57,6 +57,11 @@ links:
 
 ---
 
+# Overview Video
+<div class="fullwidth">
+<video controls="" style="background-color:black;width:100%;height:auto;aspect-ratio:16/9;"></video>
+</div>
+
 # Abstract
 
 A key challenge to ensuring the rapid transition of robotic systems from the industrial sector to more ubiquitous applications is the development of algorithms that can guarantee safe operation while in close proximity to humans.
@@ -78,14 +83,6 @@ The FRS is shown in purple in a) for a single planning iteration.
 WAITR solves a constrained trajectory optimization problem to find a collision-free motion in this FRS that does not result in relative motion while making progress towards an intermediate waypoint (grey) and the global goal. 
 Parts c)-e) show the contact constraints enforced during a hardware experiment for a single planning iteration.
 
-</div>
-
-I made this look right by adding the `no-pre` class.
-If you don't include `markdown="1"` it will fail to render any markdown inside.
-
-You can also make fullwidth embeds (this doesn't actually link to any video)
-<div class="fullwidth">
-<video controls="" style="background-color:black;width:100%;height:auto;aspect-ratio:16/9;"></video>
 </div>
 
 <div markdown="1" class="content-block grey justify">
