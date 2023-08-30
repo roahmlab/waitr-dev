@@ -13,37 +13,35 @@ mathjax: true
 # https://github.com/allejo/jekyll-anchor-headings
 autoanchor: true
 
+<!--
 # Preview image for social media cards
 image:
   path: https://cdn.pixabay.com/photo/2019/09/05/01/11/mountainous-landscape-4452844_1280.jpg
   height: 100
   width: 256
   alt: Random Landscape
+-->
 
-# Only the first author is supported by twitter metadata
 authors:
   - name: Zachary Brei
     email: breizach@umich.edu
-    footnotes: 1
+    # footnotes: 1
   - name: Jonathon Michaux
     # url: https://buildingatom.io
     email: jmichaux@umich.edu
-    footnotes: 2
+    # footnotes: 2
   - name: Bohao Zhang
     email: jimzhang@umich.edu
-    footnotes: 2
+    # footnotes: 2
   - name: Patrick Holmes
-    footnotes: 2
+    # footnotes: 2
   - name: Ram Vasudevan
     email: ramv@umich.edu
-    footnotes: 2
+    # footnotes: 2
 
-# If you just want a general footnote, you can do that too.
-# See the sel_map and armour-dev examples.
 author-footnotes:
-  1: >- # Supports markdown
-    Mechanical Engineering, UofM
-  2: Robotics, UofM
+  All authors affiliated with the Robotics Institute and department of Mechanical Engineering of the University of Michigan, Ann Arbor.
+  
   
 links:
   - icon: arxiv
@@ -54,6 +52,11 @@ links:
     icon-library: simpleicons
     text: Code
     url: https://github.com/roahmlab/waitr-dev
+  - icon: bi-file-earmark-text
+    icon-library: bootstrap-icons
+    text: Supplementary Appendices
+    [Download PDF](RAL_WAITR_Appendices.pdf)
+    
 
 # End Front Matter
 ---
