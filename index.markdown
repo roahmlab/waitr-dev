@@ -55,7 +55,7 @@ links:
   - icon: bi-file-earmark-text
     icon-library: bootstrap-icons
     text: Supplementary Appendices
-    [Download PDF](RAL_WAITR_Appendices.pdf)
+    url: RAL_WAITR_Appendices.pdf
     
 
 # End Front Matter
