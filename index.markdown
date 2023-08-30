@@ -92,7 +92,7 @@ Parts c)-e) show the contact constraints enforced during a hardware experiment f
 
 <div class="fullwidth">
 <video controls="" width="100%">
-    <source src="https://user-images.githubusercontent.com/13129304/160706120-fc7aa07b-84d0-4dc2-9630-8289401880d8.mp4">
+    <source src="fetch_tray_fail.mkv">
 </video>
 </div>
   
