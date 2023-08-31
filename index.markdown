@@ -123,7 +123,7 @@ Video first shows an example of a failure due to contact constrainsts being turn
 </div>
 
 ---
-
+<!--
 $$
 \begin{align*}
   & \phi(x,y) = \phi \left(\sum_{i=1}^n x_ie_i, \sum_{j=1}^n y_je_j \right)
@@ -158,3 +158,4 @@ $$
 }
 ```
 </div>
+-->
