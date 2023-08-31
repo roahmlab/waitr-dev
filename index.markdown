@@ -11,7 +11,7 @@ show-description: true
 mathjax: true
 # Automatically add permalinks to all headings
 # https://github.com/allejo/jekyll-anchor-headings
-autoanchor: true
+autoanchor: false
 
 authors:
   - name: Zachary Brei
