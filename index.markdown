@@ -73,7 +73,7 @@ This paper illustrates that WAITR outperforms state of the art methods in a vari
 
 ---
 
-# [Method](#content)
+# [Method](#method)
 <div markdown="1" class="content-block grey justify no-pre">
 
 ![Robot motions, joint torques and contact wrenches are overapproximated using polynomial zonotopes.](MethodFigure_v5_column_small-01.jpg)
