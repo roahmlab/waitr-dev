@@ -17,7 +17,7 @@ authors:
   - name: Zachary Brei
     email: breizach@umich.edu
     # footnotes: 1
-  - name: Jonathon Michaux
+  - name: Jonathan Michaux
     # url: https://buildingatom.io
     email: jmichaux@umich.edu
     # footnotes: 2
