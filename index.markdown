@@ -92,17 +92,13 @@ Parts c)-e) show the contact constraints enforced during a hardware experiment f
 # Simulation Results
 <div markdown="1" class="content-block grey justify no-pre">
 
+This video is a simulation trial performed to test WAITR against ARMOUR and is one of the results reported in Tab. 2 of the paper. 
+
+This video is another scenario where a fetch robot is used to manipulate a block. A pybullet environment is used, which allows the block to be dropped into place on the tray and have the pybullet physics engine simulate the interaction between the block and tray throughout the trajectory. The 
 Example of a failure due to contact constrainsts being turned off:
 <div class="fullwidth">
 <video controls="" width="100%">
-    <source src="fetch_tray_fail.mkv">
-</video>
-</div>
-
-Example of a success:
-<div class="fullwidth">
-<video controls="" width="100%">
-    <source src="fetch_tray_fail.mkv">
+    <source src="fetch_tray_comparison.mp4">
 </video>
 </div>
   
