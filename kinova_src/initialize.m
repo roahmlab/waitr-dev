@@ -6,6 +6,7 @@ fprintf("Start compiling mex robust controller\n\n");
 
 % default robot to test
 kinova_model_filename = 'kinova_with_gripper';
+fprintf("You are using this urdf: %s \n",kinova_model_filename);
 
 robot_model_file_path_filename = [pwd, '/kinova_simulator_interfaces/kinova_robust_controllers_mex/robot_model_file_path.hpp'];
 fid = fopen(robot_model_file_path_filename, 'w');
@@ -24,8 +25,8 @@ fprintf("Successfully compiled mex robust controller\n\n");
 
 cd ../../
 
-%% Initialize real-time force-constraint armour planner
-fprintf("\nStart compiling Force-constraint ARMOUR\n\n");
+%% Initialize real-time force-constraint WAITR planner
+fprintf("\nStart compiling WAITR\n\n");
 
 cd kinova_simulator_interfaces/kinova_planner_realtime
 
@@ -38,15 +39,15 @@ fclose(fid);
 terminal_output = system('env -i bash -i -c "./compile.sh"');
 
 if terminal_output ~= 0
-    error('Error when compiling Force-constraint ARMOUR real time planner code!');
+    error('Error when compiling WAITR real time planner code!');
 else
-    fprintf("Successfully compiled Force-constraint ARMOUR\n\n");
+    fprintf("Successfully compiled WAITR\n\n");
 end
 
 cd ../../
 
-%% Initialize real-time armour planner
-fprintf("\nStart compiling ARMOUR\n\n");
+%% Initialize real-time WAITR planner
+fprintf("\nStart compiling WAITR\n\n");
 
 cd kinova_simulator_interfaces/kinova_planner_realtime_original
 
@@ -59,9 +60,9 @@ fclose(fid);
 terminal_output = system('env -i bash -i -c "./compile.sh"');
 
 if terminal_output ~= 0
-    error('Error when compiling ARMOUR real time planner code!');
+    error('Error when compiling WAITR real time planner code!');
 else
-    fprintf("Successfully compiled ARMOUR\n\n");
+    fprintf("Successfully compiled WAITR\n\n");
 end
 
 cd ../../
@@ -91,3 +92,9 @@ cd ../../
 kinova_test_folder_path = pwd;
 
 save('kinova_test_folder_path.mat', 'kinova_test_folder_path');
+
+%% Create dir
+mkdir kinova_simulator_interfaces/kinova_planner_realtime/buffer/
+addpath kinova_simulator_interfaces/kinova_planner_realtime/buffer/
+mkdir kinova_simulator_interfaces/kinova_planner_realtime_armtd_comparison/buffer/
+addpath kinova_simulator_interfaces/kinova_planner_realtime_armtd_comparison/buffer/

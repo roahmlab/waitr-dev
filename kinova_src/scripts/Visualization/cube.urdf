@@ -1,0 +1,29 @@
+<robot name="cube.urdf">
+    <link name="baseLink">
+        <contact>
+            <lateral_friction value="0.5" />
+            <inertia_scaling value="3.0" />
+        </contact>
+        <inertial>
+            <origin rpy="0 0 0" xyz="0 0 0" />
+            <mass value="0" />
+            
+            <inertia ixx="0.00030578" ixy="0.0" ixz="0.0" iyy="0.00030578" iyz="0.0" izz="0.00018145" /> 
+        </inertial>
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0" />
+            <geometry>
+                <mesh filename="cube.obj" scale="0.2 0.2 0.2" />
+            </geometry>
+            <material name="red">
+                <color rgba="1 0.01 0.01 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0" />
+            <geometry>
+                <box size="0.2 0.2 0.2" />
+            </geometry>
+        </collision>
+    </link>
+</robot>

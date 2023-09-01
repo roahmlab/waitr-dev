@@ -25,7 +25,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
         Kinova = std::make_unique<Robot>(RobotFilePath, ModelUncertainty);
     }
     catch (int error_code) {
-        mexErrMsgTxt("Wrong model file path! Check armour-dev/kinova_src/kinova_simulator_interfaces/kinova_robust_controllers_mex/kinova_controller.cpp!");
+        mexErrMsgTxt("Wrong model file path! Check waitr-dev/kinova_src/kinova_simulator_interfaces/kinova_robust_controllers_mex/kinova_controller.cpp!");
     }
 
     int numJoints = Kinova->numJoints;

@@ -28,7 +28,7 @@ classdef uarmtd_planner < robot_arm_generic_planner
         smooth_obs_lambda_index;
         
         % for turning on/off constraint types
-        save_FO_zono_flag = true;
+        save_FO_zono_flag = false;
         input_constraints_flag = true;
         grasp_constraints_flag = false; % must have input constraints turned on!
         smooth_obstacle_constraints_flag = false;
@@ -83,11 +83,11 @@ classdef uarmtd_planner < robot_arm_generic_planner
             P.combs.maxcombs = 200;
             P.combs.combs = generate_combinations_upto(200);
 
-            folder_path_filename = 'kinova_test_folder_path';
+            folder_path_filename = '../kinova_test_folder_path.mat';
             if isfile(folder_path_filename)
                 % File exists.
                 data = load(folder_path_filename);
-                P.kinova_test_folder_path = kinova_test_folder_path; %
+                P.kinova_test_folder_path = data.kinova_test_folder_path; %
             else
                 % File does not exist.
                 P.kinova_test_folder_path = '';
@@ -180,10 +180,10 @@ classdef uarmtd_planner < robot_arm_generic_planner
                     P.jrs_info.g_k_bernstein = [pi/32; pi/32; pi/72; pi/72; pi/72; pi/32; pi/72];
 %                     P.jrs_info.g_k_bernstein = pi/32*ones(P.jrs_info.n_q, 1);
 
-    
-                    q_des = P.HLP.get_waypoint(agent_info,world_info,P.use_SLP,P.lookahead_distance,P.increment_waypoint_distance) ;
+                    
+                    q_des = P.HLP.get_waypoint(agent_info,world_info,P.lookahead_distance) ; % P.use_SLP,,P.increment_waypoint_distance % for graph planner
                     % store the q_des for each planning iteration
-                    P.HLP.q_des = [P.HLP.q_des, q_des];
+%                     P.HLP.q_des = [P.HLP.q_des, q_des];
 
                     if isempty(q_des)
                         P.vdisp('Waypoint creation failed! Using global goal instead.', 3)
@@ -735,42 +735,42 @@ classdef uarmtd_planner < robot_arm_generic_planner
             end
 
             % joint limit constraints
-            for i = 1:jrs_info.n_t
-                for j = 1:jrs_info.n_q
-                    % check if constraint necessary, then add
-                    q_ub_int = interval(q_ub{i, 1}{j, 1});
-                    if ~(q_ub_int.sup < 0)
-                        fprintf('ADDED UPPER BOUND JOINT POSITION CONSTRAINT ON JOINT %d AT TIME %d \n', j, i);
-                        P.constraints{end+1, 1} = @(k) slice(q_ub{i, 1}{j, 1}, k);
-                        grad_q_ub = grad(q_ub{i, 1}{j, 1}, P.jrs_info.n_q);
-                        P.grad_constraints{end+1, 1} = @(k) cellfun(@(C) slice(C, k), grad_q_ub);
-                    end
-                    
-                    q_lb_int = interval(q_lb{i, 1}{j, 1});
-                    if ~(q_lb_int.sup < 0)
-                        fprintf('ADDED LOWER BOUND JOINT POSITION CONSTRAINT ON JOINT %d AT TIME %d \n', j, i);
-                        P.constraints{end+1, 1} = @(k) slice(q_lb{i, 1}{j, 1}, k);
-                        grad_q_lb = grad(q_lb{i, 1}{j, 1}, P.jrs_info.n_q);
-                        P.grad_constraints{end+1, 1} = @(k) cellfun(@(C) slice(C, k), grad_q_lb);
-                    end
-                    
-                    dq_ub_int = interval(dq_ub{i, 1}{j, 1});
-                    if ~(dq_ub_int.sup < 0)
-                        fprintf('ADDED UPPER BOUND JOINT VELOCITY CONSTRAINT ON JOINT %d AT TIME %d \n', j, i);
-                        P.constraints{end+1, 1} = @(k) slice(dq_ub{i, 1}{j, 1}, k);
-                        grad_dq_ub = grad(dq_ub{i, 1}{j, 1}, P.jrs_info.n_q);
-                        P.grad_constraints{end+1, 1} = @(k) cellfun(@(C) slice(C, k), grad_dq_ub);
-                    end
-                    
-                    dq_lb_int = interval(dq_lb{i, 1}{j, 1});
-                    if ~(dq_lb_int.sup < 0)
-                        fprintf('ADDED LOWER BOUND JOINT VELOCITY CONSTRAINT ON JOINT %d AT TIME %d \n', j, i);
-                        P.constraints{end+1, 1} = @(k) slice(dq_lb{i, 1}{j, 1}, k);
-                        grad_dq_lb = grad(dq_lb{i, 1}{j, 1}, P.jrs_info.n_q);
-                        P.grad_constraints{end+1, 1} = @(k) cellfun(@(C) slice(C, k), grad_dq_lb);
-                    end
-                end
-            end
+%             for i = 1:jrs_info.n_t
+%                 for j = 1:jrs_info.n_q
+%                     % check if constraint necessary, then add
+%                     q_ub_int = interval(q_ub{i, 1}{j, 1});
+%                     if ~(q_ub_int.sup < 0)
+%                         fprintf('ADDED UPPER BOUND JOINT POSITION CONSTRAINT ON JOINT %d AT TIME %d \n', j, i);
+%                         P.constraints{end+1, 1} = @(k) slice(q_ub{i, 1}{j, 1}, k);
+%                         grad_q_ub = grad(q_ub{i, 1}{j, 1}, P.jrs_info.n_q);
+%                         P.grad_constraints{end+1, 1} = @(k) cellfun(@(C) slice(C, k), grad_q_ub);
+%                     end
+%                     
+%                     q_lb_int = interval(q_lb{i, 1}{j, 1});
+%                     if ~(q_lb_int.sup < 0)
+%                         fprintf('ADDED LOWER BOUND JOINT POSITION CONSTRAINT ON JOINT %d AT TIME %d \n', j, i);
+%                         P.constraints{end+1, 1} = @(k) slice(q_lb{i, 1}{j, 1}, k);
+%                         grad_q_lb = grad(q_lb{i, 1}{j, 1}, P.jrs_info.n_q);
+%                         P.grad_constraints{end+1, 1} = @(k) cellfun(@(C) slice(C, k), grad_q_lb);
+%                     end
+%                     
+%                     dq_ub_int = interval(dq_ub{i, 1}{j, 1});
+%                     if ~(dq_ub_int.sup < 0)
+%                         fprintf('ADDED UPPER BOUND JOINT VELOCITY CONSTRAINT ON JOINT %d AT TIME %d \n', j, i);
+%                         P.constraints{end+1, 1} = @(k) slice(dq_ub{i, 1}{j, 1}, k);
+%                         grad_dq_ub = grad(dq_ub{i, 1}{j, 1}, P.jrs_info.n_q);
+%                         P.grad_constraints{end+1, 1} = @(k) cellfun(@(C) slice(C, k), grad_dq_ub);
+%                     end
+%                     
+%                     dq_lb_int = interval(dq_lb{i, 1}{j, 1});
+%                     if ~(dq_lb_int.sup < 0)
+%                         fprintf('ADDED LOWER BOUND JOINT VELOCITY CONSTRAINT ON JOINT %d AT TIME %d \n', j, i);
+%                         P.constraints{end+1, 1} = @(k) slice(dq_lb{i, 1}{j, 1}, k);
+%                         grad_dq_lb = grad(dq_lb{i, 1}{j, 1}, P.jrs_info.n_q);
+%                         P.grad_constraints{end+1, 1} = @(k) cellfun(@(C) slice(C, k), grad_dq_lb);
+%                     end
+%                 end
+%             end
 
             % more constraints to add:
             % 1) orientation constraints

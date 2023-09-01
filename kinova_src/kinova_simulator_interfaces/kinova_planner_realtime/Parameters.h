@@ -5,8 +5,8 @@
 // #include "KinovaInfo.h"
 // #include "KinovaWithoutGripperInfo.h"
 // #include "KinovaForceInfo.h"
-// #include "KinovaFixedGripperInfo.h"
-#include "KinovaForceHardwareInfo.h"
+#include "KinovaFixedGripperInfo.h"
+// #include "KinovaForceHardwareInfo.h"
 
 // #define DEBUG_MODE true
 

@@ -15,7 +15,7 @@ delete(gcp('nocreate'))
 % parpool('threads')
 
 %% user parameters
-goal_type = 'fk_func'; % pick 'end_effector_location' or 'configuration' or 'fk_func'
+goal_type = 'configuration'; % pick 'end_effector_location' or 'configuration' or 'fk_func'
 goal_radius = pi/20;
 dimension = 3 ;
 verbosity = 10;
@@ -27,7 +27,7 @@ surf_rad =  0.058 / 2;
 
 %%% for planner
 traj_type = 'bernstein'; % pick 'orig' (ARMTD) or 'bernstein' (ARMOUR)
-use_cuda_flag = false;
+use_cuda_flag = true;
 grasp_constraints_flag = true;
 
 %%% for agent
@@ -35,7 +35,7 @@ agent_urdf = 'Kinova_Grasp_w_Tray.urdf';
 
 add_uncertainty_to = 'none'; % choose 'all', 'link', or 'none'
 links_with_uncertainty = {}; % if add_uncertainty_to = 'link', specify links here.
-uncertain_mass_range = [0.98, 1.02];
+uncertain_mass_range = [0.97, 1.03];
 
 agent_move_mode = 'integrator' ; % pick 'direct' or 'integrator'
 use_CAD_flag = true; % plot robot with CAD or bounding boxes
@@ -49,7 +49,9 @@ alpha_constant = 10;
 Kr = 4.0;
 
 %%% for HLP
-if_use_RRT = false;
+% default is a straight-line planner
+if_use_RRT = false; % use an RRT HLP
+if_use_graph_HLP = false; % use a graph HLP
 HLP_grow_tree_mode = 'new' ; % pick 'new' or 'keep'
 plot_waypoint_flag = true ;
 plot_waypoint_arm_flag  = true ;
@@ -183,6 +185,9 @@ if if_use_RRT
                                                'plot_waypoint_arm_flag',plot_waypoint_arm_flag,...
                                                'grow_tree_mode',HLP_grow_tree_mode,...
                                                'buffer',0.1) ;
+elseif if_use_graph_HLP
+    % need to verify this works
+    P.HLP = robot_arm_graph_planner_HLP(A,W);
 end
 
 % set up world using arm
