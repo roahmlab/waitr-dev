@@ -57,7 +57,7 @@ links:
 
 ---
 
-# Overview Video (add link to youtube video)
+# Overview Video
 <div class="fullwidth">
 <iframe style="aspect-ratio: 16/9; height: 100%; width: 100%;" src="https://www.youtube.com/embed/-n6SwmylyX4" title="Serving Time: Real-Time, Safe Motion Planning and Control for Manipulation of Unsecured Objects" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
@@ -113,7 +113,9 @@ Example of a success:
 # Hardware Results
 <div markdown="1" class="content-block grey justify no-pre">
 
-Video first shows an example of a failure due to contact constrainsts being turned off, then it shows a success when contact constraints are turned on. Both scenarios use the same global start and goal, as well as the same naive high level planner.
+The overview video above shows the hardware experiments that are referenced in the paper. 
+
+This video is another scenario where the robot uses a straight-line high level planner which selects waypoints along a straight line in joint space between the current configuration and the goal. The first part shows an example of a failure due to contact constrainsts being turned off, then it shows a success when contact constraints are turned on. Both scenarios use the same global start and goal, as well as the same straight line high level planner.
 <div class="fullwidth">
 <video controls="" width="100%">
     <source src="force_closure_720.mp4">
@@ -123,39 +125,3 @@ Video first shows an example of a failure due to contact constrainsts being turn
 </div>
 
 ---
-{::comment}
-$$
-\begin{align*}
-  & \phi(x,y) = \phi \left(\sum_{i=1}^n x_ie_i, \sum_{j=1}^n y_je_j \right)
-  = \sum_{i=1}^n \sum_{j=1}^n x_i y_j \phi(e_i, e_j) = \\
-  & (x_1, \ldots, x_n) \left( \begin{array}{ccc}
-      \phi(e_1, e_1) & \cdots & \phi(e_1, e_n) \\
-      \vdots & \ddots & \vdots \\
-      \phi(e_n, e_1) & \cdots & \phi(e_n, e_n)
-    \end{array} \right)
-  \left( \begin{array}{c}
-      y_1 \\
-      \vdots \\
-      y_n
-    \end{array} \right)
-\end{align*}
-$$
-
-<div markdown="1" class="content-block grey justify">
-# Citation
-
-*Insert whatever message*
-
-```bibtex
-@article{nash51,
-  author  = "Nash, John",
-  title   = "Non-cooperative Games",
-  journal = "Annals of Mathematics",
-  year    = 1951,
-  volume  = "54",
-  number  = "2",
-  pages   = "286--295"
-}
-```
-</div>
-{:/comment}
