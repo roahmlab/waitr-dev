@@ -94,7 +94,7 @@ Parts c)-e) show the contact constraints enforced during a hardware experiment f
 
 This video is a simulation trial performed to test WAITR against ARMOUR and is one of the results reported in Tab. 2 of the paper. 
 <div class="fullwidth">
-<iframe style="aspect-ratio: 16/9; height: 100%; width: 100%;" src="https://private-user-images.githubusercontent.com/75452583/265240042-1e48dfce-abeb-4244-9446-2adab52e5754.mp4?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE2OTM3MTEyMTEsIm5iZiI6MTY5MzcxMDkxMSwicGF0aCI6Ii83NTQ1MjU4My8yNjUyNDAwNDItMWU0OGRmY2UtYWJlYi00MjQ0LTk0NDYtMmFkYWI1MmU1NzU0Lm1wND9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFJV05KWUFYNENTVkVINTNBJTJGMjAyMzA5MDMlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjMwOTAzVDAzMTUxMVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWYzNDk3ZjUzZjI1NzQyOWE4OGMxMWIxZDExNGQ4MTVkMmZhZTdhNzM1ZTJmYjVmYThiMjE2ZDdjZTU5NWQzNjYmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.eHe4FvNHQAZNcH_V8kK5epG3j1_jP1bMTMumgknQLJ4" title="Serving Time: Real-Time, Safe Motion Planning and Control for Manipulation of Unsecured Objects" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe style="aspect-ratio: 16/9; height: 100%; width: 100%;" src="https://youtu.be/JML6dEfxkYk" title="WAITR Simulation Trial" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
 
 This video is another scenario where a fetch robot is used to manipulate a block. A pybullet environment is used, which allows the block to be dropped into place on the tray and have the pybullet physics engine simulate the interaction between the block and tray throughout the trajectory. The 
@@ -116,10 +116,10 @@ The overview video above shows the hardware experiments that are referenced in t
 
 This video is another scenario where the robot uses a straight-line high level planner which selects waypoints along a straight line in joint space between the current configuration and the goal. The first part shows an example of a failure due to contact constrainsts being turned off, then it shows a success when contact constraints are turned on. Both scenarios use the same global start and goal, as well as the same straight line high level planner.
 <div class="fullwidth">
-<video controls="" width="100%">
-    <source src="force_closure_720.mp4">
-</video>
+<iframe style="aspect-ratio: 16/9; height: 100%; width: 100%;" src="https://youtu.be/IZEH1Ks_Vcc" title="WAITR Hardware Comparison with ARMOUR" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
+
+
 
 </div>
 
