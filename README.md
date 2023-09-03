@@ -1,25 +1,15 @@
 ![](https://github.com/roahmlab/armour-dev/blob/main/assets/armour_logo.png?raw=true)
 
 # Wrench Analysis for Inertial Transport using Reachability
-**Authors:** Zachary Brei (breizach@umich.edu), Jonathan Michaux (jmichaux@umich.edu), Patrick Holmes (pdholmes@umich.edu), Bohao Zhang (jimzhang@umich.edu), and Ram Vasudevan (ramv@umich.edu). 
+**Authors:** Zachary Brei (breizach@umich.edu), Jonathan Michaux (jmichaux@umich.edu), Bohao Zhang (jimzhang@umich.edu), Patrick Holmes (pdholmes@umich.edu), and Ram Vasudevan (ramv@umich.edu). 
 
 - All authors are affiliated with the department of Mechanical Engineering and department of Robotics of the University of Michigan, 2505 Hayward Street, Ann Arbor, Michigan, USA.
 - This work is supported by ...
 - `WAITR` was developed in [Robotics and Optimization for Analysis of Human Motion (ROAHM) Lab](http://www.roahmlab.com/) at University of Michigan - Ann Arbor.
 
 ## Introduction (TODO: update to WAITR Abstract)
-A key challenge to the widespread deployment of robotic manipulators is the need to ensure safety in arbitrary environments while generating new motion plans in real-time.
-In particular, one must ensure that the manipulator does not collide with obstacles, collide with itself, or exceed its own joint torque limits.
-This challenge is compounded by the need to account for uncertainty in the mass and inertia of manipulated objects, and potentially the robot itself.
-The present work addresses this challenge by proposing Autonomous Robust Manipulation via Optimization with Uncertainty-aware Reachability (`ARMOUR`), a provably-safe, receding-horizon trajectory planner and tracking controller framework for serial link manipulators.
-In particular, this paper makes three contributions.
-First, a robust, passivity-based controller enables a manipulator to track desired trajectories with bounded error despite uncertain dynamics.
-Second, a novel variation on the Recursive Newton-Euler Algorithm (RNEA) allows \methodname to compute the set of all possible inputs required to track any trajectory within a continuum of desired trajectories.
-Third, this paper provides a method to compute the swept volume of the manipulator given a reachable set of states; this enables one to guarantee safety by checking that the swept volume does not intersect with obstacles.
-The proposed method is compared to state of the art methods and demonstrated on a variety of challenging manipulation examples in simulation, such as maneuvering a heavy dumbbell with uncertain mass around obstacles. 
-The link to the project website is (TODO: make a github website as well).
-
-<img height="270" src="/figures/urmtd_front_figure.png"/>
+A key challenge to ensuring the rapid transition of robotic systems from the industrial sector to more ubiquitous applications is the development of algorithms that can guarantee safe operation while in close proximity to humans. Motion planning and control methods, for instance, must be able to certify safety while operating in real-time in arbitrary environments and in the presence of model uncertainty. This paper proposes Wrench Analysis for Inertial Transport using Reachability (WAITR), a certifiably safe motion planning and control framework for serial link manipulators that manipulate unsecured objects in arbitrary environments. WAITR uses reachability analysis to construct over-approximations of the contact wrench applied to unsecured objects, which captures uncertainty in the manipulator dynamics, the object dynamics, and contact parameters such as the coefficient of friction. An optimization problem formulation is presented that can be solved in real-time to generate provably-safe motions for manipulating the unsecured objects. This paper illustrates that WAITR outperforms state of the art methods in a variety of simulation experiments and demonstrates its performance in the real-world.
+The link to the project website is https://roahmlab.github.io/waitr-dev/.
 
 ## Dependency
 The repo has been verified on MATLAB R>=2021b and Ubuntu >= 20.04
@@ -88,21 +78,13 @@ in MATLAB before you run any other scripts!
 Before running any scripts, make sure you run the initalization scripts successfully and put the Ipopt libraries in the proper path.
 
 All of our results in the paper is developed based on [Kinova Gen3](https://www.kinovarobotics.com/product/gen3-robots). 
-All of the related test scripts are included in [kinova_src](https://github.com/roahmlab/armour-dev/tree/main/kinova_src).
-Check the [README](https://github.com/roahmlab/armour-dev/blob/main/kinova_src/README.md) in that folder for more information.
+All of the related test scripts are included in [kinova_src](https://github.com/roahmlab/waitr-dev/tree/main/kinova_src).
+Check the [README](https://github.com/roahmlab/waitr-dev/blob/main/kinova_src/README.md) in that folder for more information.
 
 ## License
 
-`ARMOUR` is released under a [GNU license](https://github.com/roahmlab/armour-dev/blob/main/LICENSE). For a list of all code/library dependencies, please check dependency section. For a closed-source version of `ARMOUR` for commercial purpose, please contact the authors. (TODO: Maybe not this type of license)
+`WAITR` is released under a [GNU license](https://github.com/roahmlab/armour-dev/blob/main/LICENSE). For a list of all code/library dependencies, please check dependency section. For a closed-source version of `WAITR` for commercial purpose, please contact the authors.
 
-An overview of the theoretical and implementation details has been published in (TODO: publish in where?). If you use `ARMOUR` in an academic work, please cite using the following BibTex entry (TODO: fill in reference to our paper):
+An overview of the theoretical and implementation details has been published in (TODO: publish in where?). If you use `WAITR` in an academic work, please cite using the following BibTex entry (TODO: fill in reference to our paper):
 
-      @article{9792203,
-            author={Ewen, Parker and Li, Adam and Chen, Yuxin and Hong, Steven and Vasudevan, Ram},
-            journal={IEEE Robotics and Automation Letters}, 
-            title={These Maps are Made for Walking: Real-Time Terrain Property Estimation for Mobile Robots}, 
-            year={2022},
-            volume={7},
-            number={3},
-            pages={7083-7090},
-            doi={10.1109/LRA.2022.3180439}}
+Note: will add link to paper arxiv version when available.
