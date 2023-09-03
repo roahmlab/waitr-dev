@@ -81,7 +81,7 @@ Check the [README](https://github.com/roahmlab/waitr-dev/blob/main/kinova_src/RE
 
 ## License
 
-`WAITR` is released under a [GNU license](https://github.com/roahmlab/armour-dev/blob/main/LICENSE). For a list of all code/library dependencies, please check dependency section. For a closed-source version of `WAITR` for commercial purpose, please contact the authors.
+`WAITR` is released under a [GNU license](https://github.com/roahmlab/waitr-dev/blob/main/LICENSE). For a list of all code/library dependencies, please check dependency section. For a closed-source version of `WAITR` for commercial purpose, please contact the authors.
 
 An overview of the theoretical and implementation details has been published in (TODO: publish in where?). If you use `WAITR` in an academic work, please cite using the following BibTex entry (TODO: fill in reference to our paper):
 
