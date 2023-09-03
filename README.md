@@ -1,5 +1,3 @@
-![](https://github.com/roahmlab/armour-dev/blob/main/assets/armour_logo.png?raw=true)
-
 # Wrench Analysis for Inertial Transport using Reachability
 **Authors:** Zachary Brei (breizach@umich.edu), Jonathan Michaux (jmichaux@umich.edu), Bohao Zhang (jimzhang@umich.edu), Patrick Holmes (pdholmes@umich.edu), and Ram Vasudevan (ramv@umich.edu). 
 
