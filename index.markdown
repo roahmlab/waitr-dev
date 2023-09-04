@@ -94,7 +94,7 @@ Parts c)-e) show the contact constraints enforced during a hardware experiment f
 
 This video is a simulation trial performed to test WAITR against ARMOUR and is one of the results reported in Tab. 2 of the paper. 
 <div class="fullwidth">
-<iframe style="aspect-ratio: 16/9; height: 100%; width: 100%;" src="https://www.youtube.com/embed/JML6dEfxkYk?si=uPsfsfO_FFDFSKz2" title="WAITR Simulation Trial" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe style="aspect-ratio: 16/9; height: 100%; width: 100%;" src="https://www.youtube.com/embed/FHla5Lob5WU?si=3Z9s9nVwl274MF7u" title="WAITR Simulation Trial" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
 
 This video is another scenario where a fetch robot is used to manipulate a block. A pybullet environment is used, which allows the block to be dropped into place on the tray and have the pybullet physics engine simulate the interaction between the block and tray throughout the trajectory. The 
@@ -116,7 +116,7 @@ The overview video above shows the hardware experiments that are referenced in t
 
 This video is another scenario where the robot uses a straight-line high level planner which selects waypoints along a straight line in joint space between the current configuration and the goal. The first part shows an example of a failure due to contact constrainsts being turned off, then it shows a success when contact constraints are turned on. Both scenarios use the same global start and goal, as well as the same straight line high level planner.
 <div class="fullwidth">
-<iframe style="aspect-ratio: 16/9; height: 100%; width: 100%;" src="https://www.youtube.com/embed/IZEH1Ks_Vcc?si=3cju-H6ZhVFTDtAt" title="WAITR Hardware Comparison with ARMOUR" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe style="aspect-ratio: 16/9; height: 100%; width: 100%;" src="https://www.youtube.com/embed/_JzhxYgtu0w?si=laS-QZk0Ha4dhOBz" title="WAITR Hardware Comparison with ARMOUR" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
 
 
