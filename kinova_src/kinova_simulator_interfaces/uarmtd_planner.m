@@ -53,6 +53,7 @@ classdef uarmtd_planner < robot_arm_generic_planner
 %         t_plan = 0.5; % already defined in superclass planner.m
         DURATION = 1;
 
+        use_graph_planner = 0;
         increment_waypoint_distance = 0.1;
         use_SLP = false;
     end
@@ -90,6 +91,7 @@ classdef uarmtd_planner < robot_arm_generic_planner
                 P.kinova_test_folder_path = data.kinova_test_folder_path; %
             else
                 % File does not exist.
+                fprintf('Check if initialize.m was run. \n')
                 P.kinova_test_folder_path = '';
             end 
         end
@@ -143,7 +145,7 @@ classdef uarmtd_planner < robot_arm_generic_planner
                     P.vdisp('Waypoint creation failed! Using global goal instead.', 3)
                     q_des = P.HLP.goal ;
                 end
-                q_des
+%                 q_des
                             
                 % get current obstacles and create constraints
                 P.vdisp('Generating constraints',6)
@@ -180,10 +182,13 @@ classdef uarmtd_planner < robot_arm_generic_planner
                     P.jrs_info.g_k_bernstein = [pi/32; pi/32; pi/72; pi/72; pi/72; pi/32; pi/72];
 %                     P.jrs_info.g_k_bernstein = pi/32*ones(P.jrs_info.n_q, 1);
 
-                    
-                    q_des = P.HLP.get_waypoint(agent_info,world_info,P.lookahead_distance) ; % P.use_SLP,,P.increment_waypoint_distance % for graph planner
-                    % store the q_des for each planning iteration
-%                     P.HLP.q_des = [P.HLP.q_des, q_des];
+                    if P.use_graph_planner
+                        q_des = P.HLP.get_waypoint(agent_info,world_info,P.use_SLP,P.lookahead_distance,P.increment_waypoint_distance) ; 
+                    else
+                        q_des = P.HLP.get_waypoint(agent_info,world_info,P.lookahead_distance) ;
+                        % store the q_des for each planning iteration
+    %                     P.HLP.q_des = [P.HLP.q_des, q_des];
+                    end
 
                     if isempty(q_des)
                         P.vdisp('Waypoint creation failed! Using global goal instead.', 3)

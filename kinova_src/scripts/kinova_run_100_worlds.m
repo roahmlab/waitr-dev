@@ -23,6 +23,8 @@ grasp_constraint_flag = true;
 
 use_robust_input = true;
 
+use_cuda_flag = true;
+
 goal_type = 'configuration'; % pick 'end_effector_location' or 'configuration'
 goal_radius = pi/30;
 dimension = 3 ;
@@ -35,9 +37,9 @@ DURATION = 2;
 traj_type = 'bernstein'; % pick 'orig' or 'bernstein'
 allow_replan_errors = true ;
 first_iter_pause_flag = false;
-use_q_plan_for_cost = false; % otherwise use q_stop (q at final time)
+use_q_plan_for_cost = true; % otherwise use q_stop (q at final time)
 input_constraints_flag = true;
-save_FO_zono_flag = true;
+save_FO_zono_flag = false;
 
 %%% for agent
 agent_urdf = 'Kinova_Grasp_URDF.urdf';
@@ -86,7 +88,7 @@ end
 
 % world file
 world_file_header = 'scene';
-world_file_folder = '../saved_worlds/rtd-force/dur2s_largeStateBuffer_10Obs_03082023/';
+world_file_folder = '../saved_worlds/rtd-force/dur2s_largeStateBuffer_noObs_03052023/';
 world_file_location = sprintf('%s*%s*', world_file_folder, world_file_header);
 world_file_list = dir(world_file_location);
 
@@ -104,8 +106,6 @@ joint_input_limits = [-56.7, -56.7, -56.7, -56.7, -29.4, -29.4, -29.4;
                        56.7,  56.7,  56.7,  56.7,  29.4,  29.4,  29.4]; % matlab doesn't import these from urdf so hard code into class
 transmision_inertia = [8.02999999999999936 11.99620246153036440 9.00254278617515169 11.58064393167063599 8.46650409179141228 8.85370693737424297 8.85873036646853151]; % matlab doesn't import these from urdf so hard code into class
 M_min_eigenvalue = 8.2998203638; % matlab doesn't import these from urdf so hard code into class
-
-use_cuda_flag = true;
 
 %% automated from here
 % run loop

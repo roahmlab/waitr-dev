@@ -899,11 +899,11 @@ void armtd_NLP::finalize_solution(
 
     // added for reconstructing sliced reachable sets from hardware data
     // comment out for simulation use
-    Number q_des_copy[NUM_JOINTS];
-    for(int i=0;i<NUM_JOINTS;i++){
-        q_des_copy[i] = q_des[i];
-    }
-    compute(true, q_des_copy);
+    // Number q_des_copy[NUM_JOINTS];
+    // for(int i=0;i<NUM_JOINTS;i++){
+    //     q_des_copy[i] = q_des[i];
+    // }
+    // compute(true, q_des_copy);
 
     cout << "        CUDA & C++: Ipopt: desired joint angles: " << q_des.transpose() << endl;
     cout << "        CUDA & C++: Ipopt: final cost function value: " << obj_value / COST_FUNCTION_OPTIMALITY_SCALE << endl;
