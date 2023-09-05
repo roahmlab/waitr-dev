@@ -27,9 +27,9 @@ surf_rad =  0.058 / 2;
 
 %%% for planner
 traj_type = 'bernstein'; % pick 'orig' (ARMTD) or 'bernstein' (ARMOUR)
-use_cuda_flag = false;
+use_cuda_flag = true;
 grasp_constraints_flag = true;
-input_constraints_flag = false;
+input_constraints_flag = true;
 
 %%% for agent
 agent_urdf = 'Kinova_Grasp_w_Tray.urdf';
@@ -44,7 +44,7 @@ use_CAD_flag = true; % plot robot with CAD or bounding boxes
 %%% for LLC
 use_robust_input = true;
 use_true_params_for_robust = false;
-if_use_mex_controller = false;
+if_use_mex_controller = true;
 LLC_V_max = 2e-2;
 alpha_constant = 10;
 Kr = 4.0;

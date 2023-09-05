@@ -23,7 +23,7 @@ grasp_constraint_flag = true;
 
 use_robust_input = true;
 
-use_cuda_flag = false;
+use_cuda_flag = true;
 
 goal_type = 'configuration'; % pick 'end_effector_location' or 'configuration'
 goal_radius = pi/30;
@@ -60,7 +60,7 @@ measurement_noise_size_ = 0;
 %%% for LLC (must match C++)
 LLC_V_max = 1e-2;
 use_true_params_for_robust = false;
-if_use_mex_controller = false;
+if_use_mex_controller = true;
 alpha_constant = 1;
 Kr = 5;
 

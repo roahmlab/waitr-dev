@@ -35,9 +35,10 @@ traj_type = 'bernstein'; % pick 'orig' or 'bernstein'
 allow_replan_errors = true ;
 first_iter_pause_flag = false;
 use_q_plan_for_cost = false; % otherwise use q_stop (q at final time)
-input_constraints_flag = false;
+input_constraints_flag = true;
 save_FO_zono_flag = false;
-use_cuda_flag = false;
+use_cuda_flag = true;
+use_graph_planner = true;
 
 %%% for agent
 agent_urdf = 'Kinova_Grasp_URDF.urdf';
@@ -58,7 +59,7 @@ measurement_noise_size_ = 0;
 %%% for LLC (must match C++)
 LLC_V_max = 1e-2;
 use_true_params_for_robust = false;
-if_use_mex_controller = false;
+if_use_mex_controller = true;
 alpha_constant = 1;
 Kr = 5;
 
@@ -85,7 +86,7 @@ stop_threshold = 3 ; % number of failed iterations before exiting
 % end
 
 % for world
-num_obstacles = 5;
+num_obstacles = 10; % NOTE: code currently supports only 10 obstacles for graph planner
 creation_buffer = 0.075; % meter: buffer from initial/goal configuration
 
 %% robot params:
@@ -116,7 +117,7 @@ end
 % [start, goal, obstacles] = load_saved_world([world_file_folder world_filename]);
 
 tic;
-W = kinova_grasp_world_static('create_random_obstacles_flag', true, 'goal_radius', goal_radius,'N_random_obstacles', num_obstacles, 'N_obstacles', num_obstacles, 'dimension',dimension,'creation_buffer', creation_buffer, 'workspace_goal_check', 0, 'verbose',verbosity, 'goal_type', goal_type, 'grasp_constraint_flag', true,'ik_start_goal_flag', false, 'u_s', u_s, 'surf_rad', surf_rad) ; % 'obstacles', obstacles,length(obstacles), 'start', start, 'goal', goal,
+W = kinova_grasp_world_static('create_random_obstacles_flag', true, 'goal_radius', goal_radius,'N_random_obstacles', num_obstacles, 'N_obstacles', num_obstacles, 'dimension',dimension,'creation_buffer', creation_buffer, 'workspace_goal_check', 0, 'verbose',verbosity, 'goal_type', goal_type, 'grasp_constraint_flag', grasp_constraint_flag,'ik_start_goal_flag', false, 'u_s', u_s, 'surf_rad', surf_rad) ; % 'obstacles', obstacles,length(obstacles), 'start', start, 'goal', goal,
 W.robot = robot;
 
 % create arm agent
@@ -158,15 +159,16 @@ P = uarmtd_planner('verbose', verbosity, ...
                    'save_FO_zono_flag', save_FO_zono_flag,...
                    'DURATION',DURATION,...
                    'lookahead_distance',lookahead_distance, ...
-                   'plot_HLP_flag', true) ; % _wrapper
-
-P.HLP = kinova_samplebased_HLP();
-P.HLP.generatePath(W.obstacles, W.start, W.goal);
+                   'plot_HLP_flag', true,...
+                   'use_graph_planner',use_graph_planner) ; % _wrapper
 
 % set up world using arm
 I = A.get_agent_info ;
 W.setup(I) ;
 W.bounds = [-1 1 -1 1 0 2];
+
+P.HLP = kinova_samplebased_HLP();
+P.HLP.generatePath(W.obstacles, W.start, W.goal);
 
 % place arm at starting configuration
 A.state(A.joint_state_indices) = W.start ;
