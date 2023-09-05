@@ -1,4 +1,4 @@
-# ARMOUR Online Planning Implementation In C++ & CUDA
+# WAITR Online Planning Implementation In C++ & CUDA
 
 ## Prerequisites
 * [CUDA](https://developer.nvidia.com/cuda-downloads)
@@ -12,12 +12,12 @@
 
 3. Note that you have to configure the Ipopt path if it is installed in a different path on your computer! (introduce some other fancy ways to compile code)
 
-4. In 'armour_main.cpp', change the variable 'pathname' to 'WHERE-YOU-INSTALL-ARMTD/armtd-dev/cuda-dev/PZsparse-Bernstein/results/'.
+4. In 'rtd_force_main_v2.cpp', change the variable 'pathname' to 'WHERE-YOU-INSTALL-WAITR/waitr-dev/cuda-dev/PZsparse-Bernstein/results/'.
 
 5. Run './compile.sh' in the terminal to compile the C++ program.
 
 ## Files
-### armour_main.cpp
+### rtd_force_main_v2.cpp
 The main program that computes all polynomial zonotopes (forward kinematics & input constraints) and solve the optimization problem using Ipopt.
 
 ### PZsparse.h
@@ -44,6 +44,8 @@ All hyperparameters are defined in Parameters.h and all robot physical propertie
 
 * NUM_FACTORS: number of actuated&parameterized joints, Note that we assume that all actuated joints are sequentially located at the beginning of the kinematics chain.
 
+* DURATION: the time duration of a single planning iteration. Note: this must match what is set in MATLAB scripts.
+
 * SIMPLIFY_THRESHOLD: If the coefficient of a monomial in the polynomial zonotope is smaller than this threshold, then it will be reduced and over-approximated into the independent interval of the polynomial zonotope.
 
 * NUM TIME STEPS: number of time intervals split in the planning horizon (This must be an even number for the current 5-degree Bezier curve class!)
@@ -60,6 +62,12 @@ All hyperparameters are defined in Parameters.h and all robot physical propertie
 
 * TORQUE INPUT CONSTRAINT VIOLATION THRESHOLD: threshold for input constraint considered to be violated (unit: Newton * meter)
 
+* SEPARATION_CONSTRAINT_VIOLATION_THRESHOLD: threshold for vertical separation constraint considered to be violated (unit: Newton)
+
+* SLIPPING_CONSTRAINT_VIOLATION_THRESHOLD: threshold for slipping constraint considered to be violated (unit: Newton*Newton)
+
+* TIPPING_CONSTRAINT_VIOLATION_THRESHOLD: threshold for tipping constraint considered to be violated (unit: meter*meter)
+
 * IPOPT_OPTIMIZATION_TOLERANCE: Ipopt option. Click [here](https://coin-or.github.io/Ipopt/OPTIONS.html#OPT_tol) for more info
 
 * IPOPT_MAX_CPU_TIME: Ipopt option. Click [here](https://coin-or.github.io/Ipopt/OPTIONS.html#OPT_max_cpu_time) for more info
@@ -70,7 +78,7 @@ All hyperparameters are defined in Parameters.h and all robot physical propertie
 
 * IPOPT_LINEAR_SOLVER: Ipopt option. Click [here](https://coin-or.github.io/Ipopt/OPTIONS.html#OPT_linear_solver) for more info
 
-(You can add more Ipopt options in armour_main.cpp)
+(You can add more Ipopt options in rtd_force_main_v2.cpp)
 
 ## Usage
 Interface with Matlab is implemented by calling a compiled C++ program in Matlab through function 'system'.
@@ -81,7 +89,7 @@ Since the Matlab scripts may call the C++ program in different paths, we use abs
 Make sure you change the "pathname" defined in armour_main.cpp when you run the Matlab tests in a different computer.
 
 ### Input
-Input is stored as a text file in 'armtd-dev/cuda-dev/PZsparse-Bernstein/results/armour_main.in'
+Input is stored as a text file in 'waitr-dev/kinova_src/kinova_simulator_interfaces/kinova_planner_realtime/buffer/armour_main_xxx.out'. Note, different interfaces have their own buffer folder.
 
 * Initial joint position: NUM_FACTORS floating numbers
 
@@ -98,7 +106,7 @@ Input is stored as a text file in 'armtd-dev/cuda-dev/PZsparse-Bernstein/results
 * t_plan: 1 floating number range from 0 to 1 (unit: second), minimize the distance between the desired joint position and the joint trajectory at t_plan. For example, in the middle of the planning, this should be 0.5 in order to achieve receding horizon planning. At the end of the planning (the last HLP waypoint has been provided), this should be 1 because we want the robot to stop at the final goal position.
 
 ### Output
-Output is stored as multiple text files in 'armtd-dev/cuda-dev/PZsparse-Bernstein/results/armour_main_xxx.out'
+Output is stored as multiple text files in 'waitr-dev/kinova_src/kinova_simulator_interfaces/kinova_planner_realtime/buffer/armour_main_xxx.out'. Note, different interfaces have their own buffer folder.
 
 * armour_main.out stores k_opt, which contains NUM_FACTORS floating numbers
 
@@ -109,4 +117,6 @@ Output is stored as multiple text files in 'armtd-dev/cuda-dev/PZsparse-Bernstei
 * armour_main_control_input_radius.out stores the radius of the control input PZ
 
 * armour_main_constraints.out stores all constraint values that corresponds to k_opt (the first NUM TIME STEPS * NUM FACTORS entries are just the center of the control input PZ, so together with armour_main_control_input_radius.out you can get the control input PZ corresponds to the optimal parameter that ipopt finds)
+
+* armour_wrench_values.out stores the center + generator of the sliced wrench reachable set.
 
