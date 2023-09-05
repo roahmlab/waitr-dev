@@ -90,6 +90,7 @@ classdef uarmtd_planner < robot_arm_generic_planner
                 P.kinova_test_folder_path = data.kinova_test_folder_path; %
             else
                 % File does not exist.
+                fprintf('Check if initialize.m was run. \n')
                 P.kinova_test_folder_path = '';
             end 
         end

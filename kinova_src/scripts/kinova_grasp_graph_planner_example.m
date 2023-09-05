@@ -1,9 +1,8 @@
 %% description
-% This script iterates through a list of presaved random worlds and runs
-% the ARMOUR planner on them. It then saves information on how well each the
-% planner performed in each trial.
+% This script runs WAITR on a random world using a graph based HLP. Must be
+% run on a linux system for the HLP to work.
 %
-% Authors: Bohao Zhang (adapted from Patrick Holmes code)
+% Authors: Zac Brei and Bohao Zhang (adapted from Patrick Holmes code)
 % Created 25 November 2019
 % Edited 16 January 2020
 % Edited: 02 June 2022 to work with updated UARMTD code
@@ -11,7 +10,7 @@
 % Edited: 10 November 2022 clean up
 
 initialize_script_path = matlab.desktop.editor.getActiveFilename;
-cd(initialize_script_path(1:end-28));
+cd(initialize_script_path(1:end-36));
 
 close all; clear; clc;
 
@@ -36,8 +35,9 @@ traj_type = 'bernstein'; % pick 'orig' or 'bernstein'
 allow_replan_errors = true ;
 first_iter_pause_flag = false;
 use_q_plan_for_cost = false; % otherwise use q_stop (q at final time)
-input_constraints_flag = true;
-save_FO_zono_flag = true;
+input_constraints_flag = false;
+save_FO_zono_flag = false;
+use_cuda_flag = false;
 
 %%% for agent
 agent_urdf = 'Kinova_Grasp_URDF.urdf';
@@ -58,7 +58,7 @@ measurement_noise_size_ = 0;
 %%% for LLC (must match C++)
 LLC_V_max = 1e-2;
 use_true_params_for_robust = false;
-if_use_mex_controller = true;
+if_use_mex_controller = false;
 alpha_constant = 1;
 Kr = 5;
 
@@ -84,11 +84,9 @@ stop_threshold = 3 ; % number of failed iterations before exiting
 %     mkdir(file_location);
 % end
 
-% world file
-world_file_header = 'scene';
-world_file_folder = '../saved_worlds/rtd-force/dur2s_largeStateBuffer_10Obs_03082023/';
-world_file_location = sprintf('%s*%s*', world_file_folder, world_file_header);
-world_file_list = dir(world_file_location);
+% for world
+num_obstacles = 5;
+creation_buffer = 0.075; % meter: buffer from initial/goal configuration
 
 %% robot params:
 robot = importrobot(agent_urdf);
@@ -105,30 +103,21 @@ joint_input_limits = [-56.7, -56.7, -56.7, -56.7, -29.4, -29.4, -29.4;
 transmision_inertia = [8.02999999999999936 11.99620246153036440 9.00254278617515169 11.58064393167063599 8.46650409179141228 8.85370693737424297 8.85873036646853151]; % matlab doesn't import these from urdf so hard code into class
 M_min_eigenvalue = 8.2998203638; % matlab doesn't import these from urdf so hard code into class
 
-use_cuda_flag = true;
-
 %% automated from here
 % run loop
 if plot_while_running
     figure(1); clf; view(3); grid on;
 end
 
-idx = 17:17;
+% idx = 17:17;
 
 % read world CSV to get start and goal, populate obstacles:
-world_filename = world_file_list(idx).name;
-[start, goal, obstacles] = load_saved_world([world_file_folder world_filename]);
+% world_filename = world_file_list(idx).name;
+% [start, goal, obstacles] = load_saved_world([world_file_folder world_filename]);
 
-W = kinova_grasp_world_static('create_random_obstacles_flag', false, 'goal_radius', goal_radius, 'N_obstacles',length(obstacles),'dimension',dimension,'workspace_goal_check', 0,...
-                        'verbose',verbosity, 'start', start, 'goal', goal, 'obstacles', obstacles, 'goal_type', goal_type,...
-                        'grasp_constraint_flag', true,'ik_start_goal_flag', true, 'u_s', u_s, 'surf_rad', surf_rad) ;
-
-% W.start = [pi/4 - pi; -pi/2; 0; 0; 0; 0; 0];
-% W.goal =  [pi / 2; -pi/2; 0; 0; 0; 0; 0];
-% for i = 1:length(W.obstacles) 
-%     W.obstacles{i}.Z(1,1) = W.obstacles{i}.Z(1,1) + 1000;
-% %     W.obstacles{i}.zono.Z(1,1) = W.obstacles{i}.zono.Z(1,1) + 1000;
-% end
+tic;
+W = kinova_grasp_world_static('create_random_obstacles_flag', true, 'goal_radius', goal_radius,'N_random_obstacles', num_obstacles, 'N_obstacles', num_obstacles, 'dimension',dimension,'creation_buffer', creation_buffer, 'workspace_goal_check', 0, 'verbose',verbosity, 'goal_type', goal_type, 'grasp_constraint_flag', true,'ik_start_goal_flag', false, 'u_s', u_s, 'surf_rad', surf_rad) ; % 'obstacles', obstacles,length(obstacles), 'start', start, 'goal', goal,
+W.robot = robot;
 
 % create arm agent
 A = uarmtd_agent(robot, params,...
