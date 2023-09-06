@@ -9,6 +9,10 @@
 A key challenge to ensuring the rapid transition of robotic systems from the industrial sector to more ubiquitous applications is the development of algorithms that can guarantee safe operation while in close proximity to humans. Motion planning and control methods, for instance, must be able to certify safety while operating in real-time in arbitrary environments and in the presence of model uncertainty. This paper proposes Wrench Analysis for Inertial Transport using Reachability (WAITR), a certifiably safe motion planning and control framework for serial link manipulators that manipulate unsecured objects in arbitrary environments. WAITR uses reachability analysis to construct over-approximations of the contact wrench applied to unsecured objects, which captures uncertainty in the manipulator dynamics, the object dynamics, and contact parameters such as the coefficient of friction. An optimization problem formulation is presented that can be solved in real-time to generate provably-safe motions for manipulating the unsecured objects. This paper illustrates that WAITR outperforms state of the art methods in a variety of simulation experiments and demonstrates its performance in the real-world.
 The link to the project website is https://roahmlab.github.io/waitr-dev/.
 
+## Using This Repo
+
+There are 3 main subfolders: kinova_src, simulator, and urdfs. The kinova_src folder holds the example scripts in the scripts folder along with some visualization scripts, the C++/CUDA versions of the planner in kinova_simulator_interfaces, and saved_worlds holds world files for testing. The simulator folder holds utility files for simulating rigid bodies, and in particular, simulator/planners/high_level_planners holds the various high level planners that are used for testing. The urdfs folders holds different robot description files.
+
 ## Dependency
 The repo has been verified on MATLAB R>=2021b and Ubuntu >= 20.04
 
