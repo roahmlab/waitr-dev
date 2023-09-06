@@ -51,7 +51,7 @@ Download `eigen-3.3.7` by following [this link](https://gitlab.com/libeigen/eige
      sudo make
      sudo make install
  
-#### Install Ipopt and HSL (TODO: Maybe add more introduction, but will be fairly long)
+#### Install Ipopt and HSL
 libipopt and libcoinhsl could be very annoying to install and to work with MATLAB. 
 Suppose libipopt and libcoinhsl are both installed in /usr/local/lib.
 You need to add that path to both user's environmental variable 'LD_LIBRARY_PATH' and MATLAB's environment variable 'LD_LIBRARY_PATH'
@@ -70,8 +70,6 @@ Run
  
 in MATLAB before you run any other scripts!
 
-## add what to do in case of error during initialize.m?
-
 ## Usage
 Before running any scripts, make sure you run the initalization scripts successfully and put the Ipopt libraries in the proper path.
 
@@ -83,6 +81,6 @@ Check the [README](https://github.com/roahmlab/waitr-dev/blob/main/kinova_src/RE
 
 `WAITR` is released under a [GNU license](https://github.com/roahmlab/waitr-dev/blob/main/LICENSE). For a list of all code/library dependencies, please check dependency section. For a closed-source version of `WAITR` for commercial purpose, please contact the authors.
 
-An overview of the theoretical and implementation details has been published in (TODO: publish in where?). If you use `WAITR` in an academic work, please cite using the following BibTex entry (TODO: fill in reference to our paper):
+An overview of the theoretical and implementation details has been published in (TODO: add once accepted). If you use `WAITR` in an academic work, please cite using the following BibTex entry (TODO: fill in reference to our paper):
 
 Note: will add link to paper arxiv version when available.
