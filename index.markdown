@@ -37,8 +37,8 @@ author-footnotes:
 links:
   - icon: arxiv
     icon-library: simpleicons
-    text: Arxiv HP
-    url: https://arxiv.org/
+    text: Arxiv
+    url: https://arxiv.org/abs/2309.03111
   - icon: github
     icon-library: simpleicons
     text: Code
@@ -100,9 +100,8 @@ This video is a simulation trial performed to test WAITR against ARMOUR and is o
 This video is another scenario where a fetch robot is used to manipulate a block. A pybullet environment is used, which allows the block to be dropped into place on the tray and have the pybullet physics engine simulate the interaction between the block and tray throughout the trajectory. The 
 Example of a failure due to contact constrainsts being turned off:
 <div class="fullwidth">
-<video controls="" width="100%">
-    <source src="fetch_tray_comparison.mp4">
-</video>
+<iframe style="aspect-ratio: 16/9; height: 100%; width: 100%;" src="https://www.youtube.com/embed/8r16CsglxLg?si=kxZf8YNiGaLTg9rC" title="WAITR Simulation Trial" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
 </div>
   
 </div>
