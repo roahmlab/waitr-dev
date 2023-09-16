@@ -73,7 +73,7 @@ This paper illustrates that WAITR outperforms state of the art methods in a vari
 
 ---
 
-# [Method](#method)
+# Method
 <div markdown="1" class="content-block grey justify no-pre">
 
 ![Robot motions, joint torques and contact wrenches are overapproximated using polynomial zonotopes.](MethodFigure_v5_column_small-01.jpg)
@@ -102,8 +102,6 @@ Example of a failure due to contact constrainsts being turned off:
 <div class="fullwidth">
 <iframe style="aspect-ratio: 16/9; height: 100%; width: 100%;" src="https://www.youtube.com/embed/8r16CsglxLg?si=kxZf8YNiGaLTg9rC" title="WAITR Simulation Trial" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
-</div>
-  
 </div>
 
 ---
