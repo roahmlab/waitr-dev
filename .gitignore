@@ -10,6 +10,7 @@
 *.in
 *.out
 *.mexa64
+!*kinova_with_gripper.txt
 build/
 .vscode/
 kinova_src/kinova_simulator_interfaces/kinova_planner_realtime/armour_main
