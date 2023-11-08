@@ -3,6 +3,8 @@
 
 #include "PZsparse.h"
 
+double SIMPLIFY_THRESHOLD = 1e-6;
+
 /*
 Helper functions
 */
@@ -663,11 +665,7 @@ std::ostream& operator<<(std::ostream& os, PZsparse& a) {
 
     os << a.independent.transpose() << '\n';
 
-    // split different PZ apart
-    for (int i = 0; i < a.NRows; i++) {
-        os << 123456 << ' ';
-    }
-    os << '\n';
+    os << '\n' << '\n';
 
     return os;
 }

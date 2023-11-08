@@ -3,6 +3,8 @@
 
 #include "Dynamics.h"
 
+extern double SIMPLIFY_THRESHOLD;
+
 KinematicsDynamics::KinematicsDynamics(BezierCurve* traj_input) {
     traj = traj_input;
 
@@ -112,6 +114,7 @@ void KinematicsDynamics::rnea(uint t_ind,
     }
 
     // RNEA forward recursion
+    SIMPLIFY_THRESHOLD = 1e-5;
     for (int i = 0; i < NUM_JOINTS; i++) {
         // NOTE:
         // This is just a simplified implementation!!!
@@ -179,6 +182,7 @@ void KinematicsDynamics::rnea(uint t_ind,
     PZsparse n(3, 1);
 
     // RNEA reverse recursion
+    SIMPLIFY_THRESHOLD = 1e-3;
     for (int i = NUM_JOINTS - 1; i >= 0; i--) {
         // line 29
         n = N(i, 0)

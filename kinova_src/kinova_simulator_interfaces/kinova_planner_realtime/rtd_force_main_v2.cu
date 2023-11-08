@@ -381,12 +381,14 @@ Section IV:
     std::ofstream outputstream8(outputfilename8);
     outputstream8 << std::setprecision(10);
     for (int i = 0; i < NUM_TIME_STEPS; i++) {
+        outputstream8 << "timestep: " << i << endl;
         outputstream8 << kd.f_c_int(i);
     }
 
     std::ofstream outputstream9(outputfilename9);
     outputstream9 << std::setprecision(10);
     for (int i = 0; i < NUM_TIME_STEPS; i++) {
+    	outputstream9 << "timestep: " << i << endl;
         outputstream9 << kd.n_c_int(i);
     }
 
