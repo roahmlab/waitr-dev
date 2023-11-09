@@ -216,6 +216,10 @@ Section II:
     auto duration1 = std::chrono::duration_cast<std::chrono::milliseconds>(stop1 - start1);
     cout << "        CUDA & C++: Time taken by generating reachable sets: " << duration1.count() << " milliseconds" << endl;
 
+    double time_for_optimization = 100.0; // DURATION * 0.5 - duration1.count() / 1000.0 - IPOPT_TIME_BUFFER;
+    time_for_optimization = max(time_for_optimization, 0.0);
+    cout << "        CUDA & C++: Time allocated for Ipopt: " << time_for_optimization * 1000.0 << " milliseconds" << endl;
+
 /*
 Section III:
     Solve the optimization problem using IPOPT
@@ -234,7 +238,8 @@ Section III:
     SmartPtr<IpoptApplication> app = IpoptApplicationFactory();
 
     app->Options()->SetNumericValue("tol", IPOPT_OPTIMIZATION_TOLERANCE);
-	app->Options()->SetNumericValue("max_cpu_time", IPOPT_MAX_CPU_TIME);
+    app->Options()->SetNumericValue("max_wall_time", time_for_optimization);
+	// app->Options()->SetNumericValue("max_cpu_time", IPOPT_MAX_CPU_TIME);
 	app->Options()->SetIntegerValue("print_level", IPOPT_PRINT_LEVEL);
     app->Options()->SetStringValue("mu_strategy", IPOPT_MU_STRATEGY);
     app->Options()->SetStringValue("linear_solver", IPOPT_LINEAR_SOLVER);
@@ -381,14 +386,14 @@ Section IV:
     std::ofstream outputstream8(outputfilename8);
     outputstream8 << std::setprecision(10);
     for (int i = 0; i < NUM_TIME_STEPS; i++) {
-        outputstream8 << "timestep: " << i << endl;
+        // outputstream8 << "timestep: " << i << endl;
         outputstream8 << kd.f_c_int(i);
     }
 
     std::ofstream outputstream9(outputfilename9);
     outputstream9 << std::setprecision(10);
     for (int i = 0; i < NUM_TIME_STEPS; i++) {
-    	outputstream9 << "timestep: " << i << endl;
+    	// outputstream9 << "timestep: " << i << endl;
         outputstream9 << kd.n_c_int(i);
     }
 

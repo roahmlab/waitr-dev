@@ -108,6 +108,9 @@ void KinematicsDynamics::rnea(uint t_ind,
     PZsparseArray F(NUM_JOINTS, 1);
     PZsparseArray N(NUM_JOINTS, 1);
 
+    PZsparse f(3, 1);
+    PZsparse n(3, 1);
+
     if (setGravity) { // set gravity
         // directly modify the center of the PZ instance
         linear_acc.center(2) = gravity;
@@ -176,10 +179,15 @@ void KinematicsDynamics::rnea(uint t_ind,
 
         // line 29
         N(i, 0) = I_arr(i, 0) * wdot + cross(w_aux, (I_arr(i, 0) * w));
-    }
 
-    PZsparse f(3, 1);
-    PZsparse n(3, 1);
+        if (i == NUM_JOINTS - 1) {
+            f_c(0,t_ind) = F(i,0);
+            n_c(0,t_ind) = N(i,0) + cross(com_matrix(i, 0), F(i, 0)); // Need to double check this is correct
+            // note: should change this at some point to be 
+            // specifically for a specified list of contact 
+            // joints and not just the last joint.
+        }
+    }
 
     // RNEA reverse recursion
     SIMPLIFY_THRESHOLD = 1e-3;
@@ -201,14 +209,6 @@ void KinematicsDynamics::rnea(uint t_ind,
             u(i, t_ind) = u(i, t_ind) + damping[i] * traj->qd_des(i, t_ind);
 
             // friction is directly cut on the torque limits
-        }
-
-        if (i == NUM_JOINTS - 1) {
-            f_c(0,t_ind) = f; // not sure how to assign these
-            n_c(0,t_ind) = n; // not sure how to assign these
-            // note: should change this at some point to be 
-            // specifically for a specified list of contact 
-            // joints and not just the last joint.
         }
     }
 }
