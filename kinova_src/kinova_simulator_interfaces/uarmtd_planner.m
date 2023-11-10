@@ -179,7 +179,7 @@ classdef uarmtd_planner < robot_arm_generic_planner
                     % cuda-dev/PZsparse-Bernstein/Trajectory.h 
                     % !!!!!!
                     fprintf('Setting k_range in uarmtd_planner \n');
-                    P.jrs_info.g_k_bernstein = [pi/32; pi/32; pi/72; pi/72; pi/72; pi/32; pi/72];
+                    P.jrs_info.g_k_bernstein = [pi/12; pi/12; pi/72; pi/72; pi/72; pi/12; pi/72];
 %                     P.jrs_info.g_k_bernstein = pi/32*ones(P.jrs_info.n_q, 1);
 
                     if P.use_graph_planner
@@ -479,7 +479,7 @@ classdef uarmtd_planner < robot_arm_generic_planner
                 fprintf('Treating Joint %d as the Contact Joint \n', contact_joint);
 
 
-                parfor i = 1:jrs_info.n_t
+                for i = 1:jrs_info.n_t
                     
                     % only checking one contact joint (for now)
                     % ASSUMING SURFACE NORMAL IS POSITIVE Z-DIRECTION

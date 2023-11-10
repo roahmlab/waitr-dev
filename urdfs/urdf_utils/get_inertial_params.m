@@ -3,12 +3,15 @@ function [params, robot] = get_inertial_params(robot, varargin)
     % updated: 20220322 by patrick holmes
     % -- generalizing this function to work with different set types
     % -- specifying uncertainty for individual links
+    % updated: 20231109 by Zachary Brei
+    % -- specifying uncertainty amount for specific links
     
     %% parse inputs
     default_set_type = 'point'; % choose 'point', 'interval', or 'polynomial_zonotope'
     default_add_uncertainty_to = 'none'; % choose 'none', 'all', or 'link'
     default_links_with_uncertainty = {}; % if adding uncertainty to specific links, specify names here
     default_mass_range = [1 1];
+    default_specific_mass_range = []; % ones(7,2);
     default_com_range = [1 1];
     default_track_inertial_generators = false; % PZ specific, either treat inertial gens as dependent or independent
     default_zono_order = 40; % PZ specific, choose number of generators (order * dimension = max # of generators)
@@ -18,6 +21,7 @@ function [params, robot] = get_inertial_params(robot, varargin)
     addParameter(p, 'add_uncertainty_to', default_add_uncertainty_to, @ischar);
     addParameter(p, 'links_with_uncertainty', default_links_with_uncertainty, @(C) all(cellfun(@ischar, C)));
     addParameter(p, 'mass_range', default_mass_range, @(x) all(size(x) == [1, 2]));
+    addParameter(p, 'specific_mass_range',default_specific_mass_range)
     addParameter(p, 'com_range', default_com_range, @(x) all(size(x) == [1, 2]));
     addParameter(p, 'track_inertial_generators', default_track_inertial_generators, @islogical);
     addParameter(p, 'zono_order', default_zono_order, @isscalar);
@@ -206,7 +210,11 @@ end
 
 function [mass, com, I] = get_uncertain_interval_params(robot, p, i)
     % interval mass
-    mass = interval(p.Results.mass_range(1), p.Results.mass_range(2))*robot.Bodies{i}.Mass;
+    if isempty(p.Results.specific_mass_range)
+        mass = interval(p.Results.mass_range(1), p.Results.mass_range(2))*robot.Bodies{i}.Mass;
+    else
+        mass = interval(p.Results.specific_mass_range(i,1), p.Results.specific_mass_range(i,2))*robot.Bodies{i}.Mass;
+    end
     
     % interval COM
     com = interval(p.Results.com_range(1), p.Results.com_range(2))*robot.Bodies{i}.CenterOfMass';

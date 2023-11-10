@@ -50,7 +50,11 @@ classdef robot_arm_straight_line_HLP < high_level_planner
             if nargin < 4
                 lookahead_distance = HLP.default_lookahead_distance ;
             end
-            waypoint = q_cur + lookahead_distance.*dir_des ;
+            if (q_goal - q_cur) <= lookahead_distance
+                waypoint = HLP.goal;
+            else
+                waypoint = q_cur + lookahead_distance.*dir_des ;
+            end
         end
     end
 end

@@ -7,7 +7,7 @@
 % Created 25 November 2022
 
 initialize_script_path = matlab.desktop.editor.getActiveFilename;
-cd(initialize_script_path(1:end-29));
+cd(initialize_script_path(1:end-33));
 
 close all; clear; clc; dbstop if error
 
@@ -34,9 +34,19 @@ input_constraints_flag = true;
 %%% for agent
 agent_urdf = 'Kinova_Grasp_w_Tray.urdf';
 
-add_uncertainty_to = 'all'; % choose 'all', 'link', or 'none'
-links_with_uncertainty = {}; % if add_uncertainty_to = 'link', specify links here.
-uncertain_mass_range = [0.97, 1.03];
+add_uncertainty_to = 'link'; % choose 'all', 'link', or 'none'
+links_with_uncertainty = {'shoulder_link','half_arm_1_link','half_arm_2_link','forearm_link','spherical_wrist_1_link','spherical_wrist_2_link','bracelet_link','gripper_base','waiter_tray_link','object_link'}; % if add_uncertainty_to = 'link', specify links here.
+uncertain_mass_range = [0.95, 1.05];
+specific_uncertain_mass_range = [0.98, 1.02;
+                                0.98, 1.02;
+                                0.98, 1.02;
+                                0.98, 1.02;
+                                0.98, 1.02;
+                                0.98, 1.02;
+                                0.98, 1.02;
+                                0.98, 1.02;
+                                0.98, 1.02;
+                                0.95, 1.05];
 
 agent_move_mode = 'integrator' ; % pick 'direct' or 'integrator'
 use_CAD_flag = true; % plot robot with CAD or bounding boxes
@@ -47,16 +57,20 @@ use_true_params_for_robust = false;
 if_use_mex_controller = true;
 LLC_V_max = 2e-2;
 alpha_constant = 10;
-Kr = 5.0;
+Kr = 4.0;
 
 %%% for HLP
 % default is a straight-line planner
 if_use_RRT = false; % use an RRT HLP
 if_use_graph_HLP = false; % use a graph HLP
+% for RRT
 HLP_grow_tree_mode = 'new' ; % pick 'new' or 'keep'
 plot_waypoint_flag = true ;
 plot_waypoint_arm_flag  = true ;
+% for SLP and Graph
 lookahead_distance = 0.5 ;
+% for Graph
+increment_waypoint_distance = pi/30;
 
 % plotting
 plot_while_running = true ;
@@ -111,6 +125,31 @@ goal = [2.5,-0.5236,0,-2.0944,0,1.0472,0]';
 % obstacles{2} = box_obstacle_zonotope('center', [0.3; 0; 0.4],...
 %                                      'side_lengths', [0.1; 0.8; 0.05]) ;
 
+% Hardware Obstacles
+% box obstacle 1
+obstacles{1} = box_obstacle_zonotope('center', [0.53016; 0.10426; 0.1],... % z=0.13992
+                                     'side_lengths', [0.24; 0.22; 0.175]) ; % pos: 0.51089; 0.084019; 0.067449
+% obstacles{1} = box_obstacle_zonotope('center',[-0.3;0;0.5],...
+%                                     'side_lengths',[0.01; 2; 2]);
+% box obstacle 2
+obstacles{2} = box_obstacle_zonotope('center',[0.53016; 0.10426; 0.1],...
+                                    'side_lengths', [0.32; 0.32; 0.32]);
+% obstacles{2} = box_obstacle_zonotope('center',[-0.3;0;0.5],...
+%                                     'side_lengths',[0.01; 2; 2]);
+% wall obstacles
+% back wall
+obstacles{3} = box_obstacle_zonotope('center',[-0.3;0;0.5],...
+                                    'side_lengths',[0.01; 2; 2]);
+% ceiling
+obstacles{4} = box_obstacle_zonotope('center',[0.8; 0; 1],...
+                                    'side_lengths',[2; 2; 0.01]);
+% side wall
+obstacles{5} = box_obstacle_zonotope('center',[1; 1.5; 0],...
+                                    'side_lengths',[2; 0.01; 2]);
+% floor
+obstacles{6} = box_obstacle_zonotope('center',[1; 0; -0.01],...
+                                    'side_lengths',[2; 2; 0.01]);
+
 %% robot params:
 robot = importrobot(agent_urdf);
 robot.DataFormat = 'col';
@@ -118,7 +157,8 @@ robot.Gravity = [0 0 -9.81];
 params = load_robot_params(robot, ...
                            'add_uncertainty_to', add_uncertainty_to, ...
                            'links_with_uncertainty', links_with_uncertainty,...
-                           'uncertain_mass_range', uncertain_mass_range);
+                           'uncertain_mass_range', uncertain_mass_range,...
+                           'specific_uncertain_mass_range',specific_uncertain_mass_range);
 joint_speed_limits = [-1.3963, -1.3963, -1.3963, -1.3963, -1.2218, -1.2218, -1.2218;
                        1.3963,  1.3963,  1.3963,  1.3963,  1.2218,  1.2218,  1.2218]; % matlab doesn't import these from urdf so hard code into class
 joint_input_limits = [-56.7, -56.7, -56.7, -56.7, -29.4, -29.4, -29.4;
@@ -148,9 +188,9 @@ W = kinova_grasp_world_static('create_random_obstacles_flag', false,...
                                 'ik_start_goal_flag', true,...
                                 'u_s', u_s, ...
                                 'surf_rad', surf_rad,...
-                                'robot_params', params) ; 
+                                'robot_params', params); % ,... 
                                 % 'N_obstacles',length(obstacles),...
-                                % 'obstacles', obstacles, 
+                                % 'obstacles', obstacles);
 
 % create arm agent
 A = uarmtd_agent(robot, params,...
@@ -191,6 +231,7 @@ P = uarmtd_planner('verbose', verbosity, ...
                    'use_cuda', use_cuda_flag,...
                    'plot_HLP_flag', true, ...
                    'lookahead_distance', lookahead_distance, ...
+                   'increment_waypoint_distance',increment_waypoint_distance,...
                    'u_s', u_s,...
                    'surf_rad', surf_rad,...
                    'DURATION', DURATION) ; % 't_move_temp', t_move't_plan', t_plan,...'t_stop', t_stop % _wrapper
@@ -398,11 +439,6 @@ max_plan_time = max(plan_time)
 iterations = summary.total_iterations
 num_brakes = sum(summary.stop_check)
 
-velocity = A.state(A.joint_speed_indices,:);
-mean_vel = mean(abs(velocity),2);
-max_vel = max(abs(velocity),[],2);
-velocity_mean_max = [mean_vel max_vel]
-
 %% Max tilting angle
 
 [max_tilt_angle max_tilt_angle_index] = max(abs(A.state(13,:)))
@@ -420,3 +456,18 @@ max_tilt_angle_deg = rad2deg(max_tilt_angle)
 % end
 % 
 % save('TiltTest_1em4_v2.mat','forward_kin','quat_angles')
+velocity = A.state(A.joint_speed_indices,:);
+mean_vel = mean(abs(velocity),2);
+max_vel = max(abs(velocity),[],2);
+velocity_mean_max = [mean_vel max_vel]
+
+%% storing test results
+
+load('Velocity_Krange_Test.mat');
+velocity_test_w_krange.test28 = struct();
+velocity_test_w_krange.test28.krange = P.jrs_info.g_k_bernstein;
+velocity_test_w_krange.test28.vel_mean_max = velocity_mean_max;
+velocity_test_w_krange.test28.goal_check = summary.goal_check;
+velocity_test_w_krange.test28.planning_time = summary.planning_time;
+velocity_test_w_krange.test28.u_s = u_s;
+save('Velocity_Krange_Test.mat','velocity_test_w_krange')
