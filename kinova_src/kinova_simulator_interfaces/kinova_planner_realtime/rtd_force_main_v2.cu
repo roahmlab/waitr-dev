@@ -216,7 +216,7 @@ Section II:
     auto duration1 = std::chrono::duration_cast<std::chrono::milliseconds>(stop1 - start1);
     cout << "        CUDA & C++: Time taken by generating reachable sets: " << duration1.count() << " milliseconds" << endl;
 
-    double time_for_optimization = 100.0; // DURATION * 0.5 - duration1.count() / 1000.0 - IPOPT_TIME_BUFFER;
+    double time_for_optimization = DURATION * 0.5 - duration1.count() / 1000.0 - IPOPT_TIME_BUFFER;
     time_for_optimization = max(time_for_optimization, 0.0);
     cout << "        CUDA & C++: Time allocated for Ipopt: " << time_for_optimization * 1000.0 << " milliseconds" << endl;
 
