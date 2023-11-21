@@ -6,7 +6,8 @@
 // #include "KinovaWithoutGripperInfo.h"
 // #include "KinovaForceInfo.h"
 // #include "KinovaFixedGripperInfo.h"
-#include "KinovaForceHardwareInfo.h"
+// #include "KinovaForceHardwareInfo.h"
+#include "KinovaChampagneEdgeCondensed.h"
 
 // #define DEBUG_MODE true
 
@@ -19,10 +20,10 @@
     #define DURATION 2.0
 
     // number of time steps (This should be an EVEN number!!!)
-    #define NUM_TIME_STEPS 40
+    #define NUM_TIME_STEPS 60
 
     // range of parameters (size of generators in PZ).
-    const double k_range[NUM_FACTORS] = { M_PI / 12, M_PI / 12, M_PI / 72, M_PI / 72, M_PI / 72, M_PI / 12, M_PI / 72 }; // (radian)
+    const double k_range[NUM_FACTORS] = { M_PI / 60, M_PI / 60, M_PI / 60, M_PI / 60, M_PI / 60, M_PI / 60, M_PI / 60 }; // (radian)
 
 // Parameters for CollisionChecking.h:
     // maximum number of obstacles (used for memory pre-allocation)

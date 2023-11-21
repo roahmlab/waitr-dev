@@ -7,7 +7,7 @@ close all; clear; clc;
 fig_num = 0;
 
 %% initialize robot
-robot = importrobot('Kinova_Grasp_w_Tray.urdf');
+robot = importrobot('Kinova_Grasp_Champagne_Edge.urdf');
 robot.DataFormat = 'col';
 robot.Gravity = [0 0 -9.81];
 params = load_robot_params(robot, ...
@@ -28,10 +28,11 @@ link_poly_zonotopes = create_pz_bounding_boxes(robot);
 % choose random initial conditions and make sure they are aligned with
 % the first three rows in buffer/armour.in
 % basic start
-q0 = [-2.53318530717959	-1.04720000000000	0.0	-2.09440000000000	0.0	1.57080000000000	0.0 ]';
+% -2.53318530717959	-1.04720000000000	0.0	-2.09440000000000	0.0	1.57080000000000	0.0 
+q0 = [0.0000000000 -0.00000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000]';
 qd0 = [0.0000000000 -0.00000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 ]';
 qdd0 = [0.0000000000 0.00000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 ]';
-qdes = [0.0000000000 -1.5707963268 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.1000000000  ]';
+qdes = [0.0000000000 0.0 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.000000000  ]';
 % random
 % q0 = [1.8050949857 1.5523818073 -0.5593660299 0.1468763715 -0.5267268712 -0.2220512642 -2.0707212135  ]';
 % qd0 = [0.0075302418 0.0092257990 -0.0049952047 -0.0036228836 -0.0040500586 -0.0016993588 -0.0063685653  ]';
@@ -64,8 +65,8 @@ qd1 = zeros(7,1); % final velocity is zero
 qdd1 = zeros(7,1); % final acceleration is zero
 
 % for tid = 1:128
-duration = 1.75;
-tid = 50;
+duration = 2.0;
+tid = 128;
 tspan = linspace(0, duration, tid + 1);
 
 duration_onesec = 1;
@@ -315,15 +316,15 @@ des_traj_slice = readmatrix('buffer/armour_desired_sliced.out', 'FileType', 'tex
 
 %% Plotting Link Reach Sets
 
-tid = 50;
+plot_tid = 1;
 
 % fig_num = fig_num + 1;
 % figure(fig_num); 
 % hold on; view(3); axis equal; axis on;
 
 % choose a random time inside this time interval
-t_lb = tspan(tid);
-t_ub = tspan(tid + 1);
+t_lb = tspan(plot_tid);
+t_ub = tspan(plot_tid + 1);
 t = (t_ub - t_lb) * rand + t_lb;
 
 q_rand = get_desired_traj(beta, t, duration);
@@ -343,11 +344,11 @@ grid on;
 % plot link reachsets
 numBodies = 8;
 for j = 1:numBodies
-    c = link_reachset_center((tid-1)*numBodies+j, :)';
-    g = link_reachset_generators( ((tid-1)*numBodies+j-1)*3+1 : ((tid-1)*numBodies+j)*3, :);
+    c = link_reachset_center((plot_tid-1)*numBodies+j, :)';
+    g = link_reachset_generators( ((plot_tid-1)*numBodies+j-1)*3+1 : ((plot_tid-1)*numBodies+j)*3, :);
     Z = zonotope(c, g);
     Z_v = vertices(Z)';
-    trisurf(convhulln(Z_v),Z_v(:,1),Z_v(:,2),Z_v(:,3),'FaceColor',[0,0,1],'FaceAlpha',0.1,'EdgeColor',[0,0,1],'EdgeAlpha',0.3);
+    trisurf(convhulln(Z_v),Z_v(:,1),Z_v(:,2),Z_v(:,3),'FaceColor',[0,0,1],'FaceAlpha',0.05,'EdgeColor',[0,0,1],'EdgeAlpha',0.3);
 end
 % lighting flat
 % end

@@ -3,7 +3,7 @@ clear all;
 close all;
 
 % filename = 'trial_scene_059_.mat';
-filename = ['TestNewCost_FixedGoal_v3.mat'];
+filename = ['pi32_trial_scene_010_008.csv.mat'];
 
 verbosity = 0 ;
 dimension = 3 ;
@@ -23,7 +23,7 @@ start = summary.start ;
 goal = summary.goal ;
 
 % agent just for visualizing, parameters may differ
-agent_urdf = 'Kinova_Grasp_w_Tray_Grey.urdf';
+agent_urdf = 'Kinova_Grasp_Cylinder_Edge.urdf';
 robot = importrobot(agent_urdf);
 robot.DataFormat = 'col';
 robot.Gravity = [0 0 -9.81];
@@ -92,7 +92,7 @@ if plot_start_and_end_config_only
     pause();
     plot(A) ;
 else
-    animate(A,'TestNewCostAnimation_v5.gif');
+    animate(A,'test1.gif');
 end
 
 % figure(2)

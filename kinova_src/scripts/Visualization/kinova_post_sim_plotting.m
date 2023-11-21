@@ -7,7 +7,7 @@
 
 % clear all; close all; clc;
 
-load('trial_scene_010_003.csv.mat')
+load('TippingTest1.mat')
 
 %% Plotting flags
 
@@ -20,21 +20,21 @@ plot_constraint = true;
 plot_torque = false;
 plot_torque_control = false;
 plot_torque_accel = false;
-plot_zmp = false;
-plot_friction_cone = false;
+plot_zmp = true;
+plot_friction_cone = true;
 plot_friction_cone_2D = true;
 
-pz_approx = false;
+pz_approx = true;
 
-plot_force_approx = false;
-plot_constraint_approx = false;
-plot_uc_constraint_approx = false;
+plot_force_approx = true;
+plot_constraint_approx = true;
+plot_uc_constraint_approx = true;
 
-plot_force_approx_v2 = false;
-plot_constraint_approx_v2 = false;
-plot_uc_constraint_approx_v2 = false;
+plot_force_approx_v2 = true;
+plot_constraint_approx_v2 = true;
+plot_uc_constraint_approx_v2 = true;
 
-plot_k = false;
+plot_k = true;
 
 %% Defining Transmission Inertia
 transmision_inertia = [8.02999999999999936 11.99620246153036440 9.00254278617515169 11.58064393167063599 8.46650409179141228 8.85370693737424297 8.85873036646853151]; % matlab doesn't import these from urdf so hard code into class
@@ -106,29 +106,29 @@ end
 
 %% flags
 
-plot_states = true;
-plot_control = true;
-plot_accel = true;
-plot_force = true;
-plot_moment = true;
-plot_constraint = true;
-plot_torque = true;
-plot_torque_control = false;
-plot_torque_accel = false;
-plot_zmp = true;
-plot_friction_cone = false;
-
-pz_approx = false;
-
-plot_force_approx = false;
-plot_constraint_approx = false;
-plot_uc_constraint_approx = false;
-
-plot_force_approx_v2 = false;
-plot_constraint_approx_v2 = false;
-plot_uc_constraint_approx_v2 = false;
-
-plot_k = false;
+% plot_states = true;
+% plot_control = true;
+% plot_accel = true;
+% plot_force = true;
+% plot_moment = true;
+% plot_constraint = true;
+% plot_torque = true;
+% plot_torque_control = false;
+% plot_torque_accel = false;
+% plot_zmp = true;
+% plot_friction_cone = false;
+% 
+% pz_approx = false;
+% 
+% plot_force_approx = false;
+% plot_constraint_approx = false;
+% plot_uc_constraint_approx = false;
+% 
+% plot_force_approx_v2 = false;
+% plot_constraint_approx_v2 = false;
+% plot_uc_constraint_approx_v2 = false;
+% 
+% plot_k = false;
 
 % for i = 1:length(A.time)
 %     figure(101)

@@ -7,7 +7,7 @@
 % Created 25 November 2022
 
 initialize_script_path = matlab.desktop.editor.getActiveFilename;
-cd(initialize_script_path(1:end-29));
+cd(initialize_script_path(1:end-32));
 
 close all; clear; clc; dbstop if error
 
@@ -23,7 +23,12 @@ verbosity = 10;
 DURATION = 2.0;
 
 u_s = 0.6;
-surf_rad =  0.058 / 2;
+surf_rad =  0.0685 / 2;
+
+%%% random obstacles
+N_random_obstacles = 6;
+creation_buffer = 0.075;
+create_random_obstacles_flag = true;
 
 %%% for planner
 traj_type = 'bernstein'; % pick 'orig' (ARMTD) or 'bernstein' (ARMOUR)
@@ -32,7 +37,7 @@ grasp_constraints_flag = true;
 input_constraints_flag = true;
 
 %%% for agent
-agent_urdf = 'Kinova_Grasp_w_Tray.urdf';
+agent_urdf = 'Kinova_Grasp_Champagne_Edge.urdf';
 
 add_uncertainty_to = 'all'; % choose 'all', 'link', or 'none'
 links_with_uncertainty = {}; % if add_uncertainty_to = 'link', specify links here.
@@ -45,7 +50,7 @@ use_CAD_flag = true; % plot robot with CAD or bounding boxes
 use_robust_input = true;
 use_true_params_for_robust = false;
 if_use_mex_controller = true;
-LLC_V_max = 2e-2;
+LLC_V_max = 1e-2;
 alpha_constant = 10;
 Kr = 5.0;
 
@@ -56,7 +61,7 @@ if_use_graph_HLP = false; % use a graph HLP
 HLP_grow_tree_mode = 'new' ; % pick 'new' or 'keep'
 plot_waypoint_flag = true ;
 plot_waypoint_arm_flag  = true ;
-lookahead_distance = 0.5 ;
+lookahead_distance = 0.05 ;
 
 % plotting
 plot_while_running = true ;
@@ -96,6 +101,11 @@ goal = [2.5,-0.5236,0,-2.0944,0,1.0472,0]';
 %    -2.0458;
 %     1.4523];
 
+
+% swing
+% start = [0;-pi/2;0;0;0;0;0];
+% goal = [pi;-pi/2;pi;0;0;0;0];
+
 % random that struggles to reach goal
 % use to debug gradients as well
 % start = [0.9534;-1.4310;0.1330;0.6418;-0.9534;-0.9534;0.0637];
@@ -119,7 +129,7 @@ joint_speed_limits = [-1.3963, -1.3963, -1.3963, -1.3963, -1.2218, -1.2218, -1.2
 joint_input_limits = [-56.7, -56.7, -56.7, -56.7, -29.4, -29.4, -29.4;
                        56.7,  56.7,  56.7,  56.7,  29.4,  29.4,  29.4]; % matlab doesn't import these from urdf so hard code into class
 transmision_inertia = [8.02999999999999936 11.99620246153036440 9.00254278617515169 11.58064393167063599 8.46650409179141228 8.85370693737424297 8.85873036646853151]; % matlab doesn't import these from urdf so hard code into class
-M_min_eigenvalue = 8.29938; % 8.0386472; % ; matlab doesn't import these from urdf so hard code into class
+M_min_eigenvalue = 8.00; % 8.29938; % ; matlab doesn't import these from urdf so hard code into class
 
 % figure(101)
 % show(robot)
@@ -131,7 +141,9 @@ end
 
 % run loop
 tic;
-W = kinova_grasp_world_static('create_random_obstacles_flag', false,...
+W = kinova_grasp_world_static('create_random_obstacles_flag', create_random_obstacles_flag,...
+                                'N_random_obstacles',N_random_obstacles,...
+                                'creation_buffer', creation_buffer,...
                                 'goal_radius', goal_radius,...
                                 'dimension',dimension,...
                                 'workspace_goal_check', 0,...

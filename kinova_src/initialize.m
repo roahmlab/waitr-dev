@@ -5,7 +5,7 @@ cd(initialize_script_path(1:end-12));
 fprintf("Start compiling mex robust controller\n\n");
 
 % default robot to test
-kinova_model_filename = 'kinova_with_gripper';
+kinova_model_filename = 'Kinova_Grasp_Champagne_Edge_Condensed';
 fprintf("You are using this urdf: %s \n",kinova_model_filename);
 
 robot_model_file_path_filename = [pwd, '/kinova_simulator_interfaces/kinova_robust_controllers_mex/robot_model_file_path.hpp'];

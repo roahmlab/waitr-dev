@@ -55,9 +55,9 @@ use_CAD_flag = true; % plot robot with CAD or bounding boxes
 use_robust_input = true;
 use_true_params_for_robust = false;
 if_use_mex_controller = true;
-LLC_V_max = 2e-2;
+LLC_V_max = 1e-2;
 alpha_constant = 10;
-Kr = 4.0;
+Kr = 5.0;
 
 %%% for HLP
 % default is a straight-line planner
@@ -68,7 +68,7 @@ HLP_grow_tree_mode = 'new' ; % pick 'new' or 'keep'
 plot_waypoint_flag = true ;
 plot_waypoint_arm_flag  = true ;
 % for SLP and Graph
-lookahead_distance = 0.5 ;
+lookahead_distance = 0.1 ;
 % for Graph
 increment_waypoint_distance = pi/30;
 
@@ -463,11 +463,11 @@ velocity_mean_max = [mean_vel max_vel]
 
 %% storing test results
 
-load('Velocity_Krange_Test.mat');
-velocity_test_w_krange.test28 = struct();
-velocity_test_w_krange.test28.krange = P.jrs_info.g_k_bernstein;
-velocity_test_w_krange.test28.vel_mean_max = velocity_mean_max;
-velocity_test_w_krange.test28.goal_check = summary.goal_check;
-velocity_test_w_krange.test28.planning_time = summary.planning_time;
-velocity_test_w_krange.test28.u_s = u_s;
-save('Velocity_Krange_Test.mat','velocity_test_w_krange')
+% load('Velocity_Krange_Test.mat');
+% velocity_test_w_krange.test28 = struct();
+% velocity_test_w_krange.test28.krange = P.jrs_info.g_k_bernstein;
+% velocity_test_w_krange.test28.vel_mean_max = velocity_mean_max;
+% velocity_test_w_krange.test28.goal_check = summary.goal_check;
+% velocity_test_w_krange.test28.planning_time = summary.planning_time;
+% velocity_test_w_krange.test28.u_s = u_s;
+% save('Velocity_Krange_Test.mat','velocity_test_w_krange')

@@ -117,7 +117,7 @@ void KinematicsDynamics::rnea(uint t_ind,
     }
 
     // RNEA forward recursion
-    SIMPLIFY_THRESHOLD = 2.5e-4;
+    SIMPLIFY_THRESHOLD = 5.0e-5;
     for (int i = 0; i < NUM_JOINTS; i++) {
         // NOTE:
         // This is just a simplified implementation!!!

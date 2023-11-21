@@ -1,8 +1,8 @@
 #include "Dynamics.h"
 #include "CollisionChecking.h"
 
-// const std::string pathname = "/home/roahmlab/Documents/armour-dev/kinova_src/kinova_simulator_interfaces/kinova_planner_realtime/buffer/";
-const std::string pathname = "/home/baiyuew/ROAHM/armour-dev/kinova_src/kinova_simulator_interfaces/kinova_planner_realtime/buffer/";
+const std::string pathname = "/home/breizach/Documents/Github/waitr-dev/kinova_src/kinova_simulator_interfaces/kinova_planner_realtime/buffer/";
+// const std::string pathname = "/home/baiyuew/ROAHM/armour-dev/kinova_src/kinova_simulator_interfaces/kinova_planner_realtime/buffer/";
 const std::string inputfilename = pathname + "armour.in";
 const std::string outputfilename1 = pathname + "armour.out";
 const std::string outputfilename2 = pathname + "armour_joint_position_center.out";
@@ -84,9 +84,9 @@ Section I:
 
     inputstream.close();
 
-    double t_plan = 1.0; // optimize the distance between q_des and the desired trajectories at t_plan
+    double t_plan = 0.5*DURATION; // optimize the distance between q_des and the desired trajectories at t_plan
     // Kinova Hardware Demo Values: u_s = 0.609382421; surf_rad =  0.058;
-    double u_s = 0.609382421; // 0.5; // static coefficient of friction between tray and object
+    double u_s = 0.6; // 0.5; // static coefficient of friction between tray and object
     double surf_rad =  0.058/2; // 0.0762; // radius of contact area between tray and object (area assumed to be circular)
     // Note: might want to change this to be input to the C++ code from matlab?
 
@@ -206,9 +206,9 @@ Section III:
 */
 
     // double factors[NUM_FACTORS] = {0.5, 0.7, 0.7, 0.0, -0.8, -0.6, -0.7};
-    // double factors[NUM_FACTORS] = {0,0,0,0,0,0,0};
-    double factors[NUM_FACTORS] = {1,1,1,1,1,1,1};
-    // double factors[NUM_FACTORS] = {-1,-1,-1,-1,-1,-1,-1};
+    // double factors[NUM_FACTORS] = {0.0,0.0,0.0,0.0,0.0,0.0,0.0};
+    double factors[NUM_FACTORS] = {1.0,1.0,1.0,1.0,1.0,1.0,1.0};
+    // double factors[NUM_FACTORS] = {-1.0,-1.0,-1.0,-1.0,-1.0,-1.0,-1.0};
 
     Eigen::MatrixXd qd_des_sliced_center(NUM_FACTORS, NUM_TIME_STEPS);
     Eigen::MatrixXd torque_sliced_center(NUM_FACTORS, NUM_TIME_STEPS);

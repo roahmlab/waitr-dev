@@ -170,7 +170,7 @@ classdef uarmtd_planner < robot_arm_generic_planner
 
                 %%%%% This one
                 if strcmp(P.traj_type, 'bernstein')
-                    P.jrs_info.n_t = 40;
+                    P.jrs_info.n_t = 60;
                     P.jrs_info.n_q = 7;
                     P.jrs_info.n_k = 7;
                     P.jrs_info.c_k_bernstein = zeros(7,1);
@@ -179,7 +179,7 @@ classdef uarmtd_planner < robot_arm_generic_planner
                     % cuda-dev/PZsparse-Bernstein/Trajectory.h 
                     % !!!!!!
                     fprintf('Setting k_range in uarmtd_planner \n');
-                    P.jrs_info.g_k_bernstein = [pi/12; pi/12; pi/72; pi/72; pi/72; pi/12; pi/72];
+                    P.jrs_info.g_k_bernstein = [pi/60; pi/60; pi/60; pi/60; pi/60; pi/60; pi/60];
 %                     P.jrs_info.g_k_bernstein = pi/32*ones(P.jrs_info.n_q, 1);
 
                     if P.use_graph_planner
@@ -296,9 +296,9 @@ classdef uarmtd_planner < robot_arm_generic_planner
             P.info.q_dot_0 = [P.info.q_dot_0, {q_dot_0}] ;
             P.info.k_opt = [P.info.k_opt, {k_opt}] ;
 
-%             P.info.contact_constraint_radii = [P.info.contact_constraint_radii {contact_constraint_radii}];
-%             P.info.wrench_radii = [P.info.wrench_radii {wrench_radii}];
-%             P.info.constraints_value = [P.info.constraints_value {constraints_value}];
+            P.info.contact_constraint_radii = [P.info.contact_constraint_radii {contact_constraint_radii}];
+            P.info.wrench_radii = [P.info.wrench_radii {wrench_radii}];
+            P.info.constraints_value = [P.info.constraints_value {constraints_value}];
 
 
             if P.save_FO_zono_flag
