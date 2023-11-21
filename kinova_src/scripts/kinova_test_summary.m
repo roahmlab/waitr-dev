@@ -17,12 +17,20 @@ save_file_header = 'trial_' ;
 % file_location = '/home/roahmlab/Documents/armour-dev/kinova_src/results/rtd-force/dur2s_largeStateBuffer_noObs_03052023_v2' ;
 % file_location = '/home/roahmlab/Documents/armour-dev/kinova_src/results/rtd-force/dur2s_largeStateBuffer_noObs_03052023_v2_single' ;
 % file_location = '/home/roahmlab/Documents/armour-dev/kinova_src/results/rtd-force/dur2s_largeStateBuffer_10Obs_03072023' ;
-% file_location = '/home/roahmlab/Documents/armour-dev/kinova_src/results/rtd-force/dur2s_largeStateBuffer_10Obs_03082023' ;
+% file_location = '/home/roahmlab/Documents/armour-dev/kinova_src/results/rtd-force/dur2s_largeStateBuffer_10Obs_03082023'; % paper result
 % file_location = '/home/roahmlab/Documents/armour-dev/kinova_src/results/rtd-force/dur2s_largeStateBuffer_10Obs_03082023_graph' ;
 % file_location = '/home/roahmlab/Documents/armour-dev/kinova_src/results/rtd-force/dur2s_largeStateBuffer_10Obs_03082023_graph_armour' ;
 % file_location = 'D:\Grad School\Research\Roahm Lab\RTD Force\dur2s_largeStateBuffer_10Obs_03082023\dur2s_largeStateBuffer_10Obs_03082023';
 % file_location = 'D:\Grad School\Research\Roahm Lab\RTD Force\dur2s_largeStateBuffer_10Obs_03082023_graph\dur2s_largeStateBuffer_10Obs_03082023_graph';
-file_location = 'D:\Grad School\Research\Roahm Lab\RTD Force\dur2s_largeStateBuffer_10Obs_03082023_graph_armour\dur2s_largeStateBuffer_10Obs_03082023_graph_armour';
+% file_location = 'D:\Grad School\Research\Roahm Lab\RTD Force\dur2s_largeStateBuffer_10Obs_03082023_graph_armour\dur2s_largeStateBuffer_10Obs_03082023_graph_armour';
+% file_location = '/home/roahmlab/Documents/waitr-dev/kinova_src/results/rtd-force/k1234567_pi48_10Obs_11102023' ;
+% file_location = '/home/roahmlab/Documents/waitr-dev/kinova_src/results/rtd-force/k1234567_pi32_10Obs_11102023' ;
+% file_location = '/home/roahmlab/Documents/waitr-dev/kinova_src/results/rtd-force/k1234567_pi32_10Obs_11102023_graph' ;
+% file_location = '/home/roahmlab/Documents/waitr-dev/kinova_src/results/rtd-force/k1234567_pi48_10Obs_11102023_graph' ;
+% file_location = '/home/roahmlab/Documents/waitr-dev/kinova_src/results/rtd-force/k1234567_pi48_nt128_10Obs_11152023_fixed_graph' ;
+% file_location = '/home/roahmlab/Documents/waitr-dev/kinova_src/results/rtd-force/k1234567_pi32_nt128_10Obs_11152023_fixed_graph' ;
+% file_location = '/home/roahmlab/Documents/waitr-dev/kinova_src/results/rtd-force/k123_pi32_k4567_pi72_nt128_10Obs_11152023_fixed_graph';
+file_location = '/home/roahmlab/Documents/waitr-dev/kinova_src/results/rtd-force/k1234567_pi72_10Obs_11102023_ARMOUR_SLP' ;
 
 % file_location = '../results/hard' ;
 addpath(file_location);
@@ -41,6 +49,7 @@ grasp_tipping_check = [];
 maxiter = [];
 no_move = [];
 mean_planning_time = [];
+mean_vel = [];
 
 num_total_iterations = [];
 
@@ -49,6 +58,8 @@ for i = 1:length(summary_files)
 
     mean_planning_time = [mean_planning_time mean(cell2mat(data.P.info.planning_time))];
     num_total_iterations = [num_total_iterations data.summary.total_iterations];
+    mean_vel(:,i) = mean(abs(data.summary.trajectory(data.A.joint_speed_indices,:)),2);
+
     if data.summary.total_iterations > data.S.max_sim_iterations
         maxiter = [maxiter i];
     end
@@ -111,3 +122,18 @@ fprintf("Number of Test Trials that violated tipping constraint: %d\n",length(gr
 fprintf("Number of Test Trials that reach the goals: %d\n", length(goal_check));
 fprintf("Number of Test Trials that do not reach the goals but stop safely: %d\n", length(infeasible_check));
 fprintf("Average number of iterations: %d\n",mean(num_total_iterations))
+
+%% Velocity Processing
+mean_vel;
+
+% find mean velocity of trials that move
+idx = 1:length(summary_files);
+idx_move = [];
+for i=1:length(idx)
+    if ~ismember(i,no_move)
+        idx_move = [idx_move i];
+    end
+end
+
+mean_vel_processed = mean_vel(:,idx_move);
+overall_mean = mean(mean_vel_processed,2)

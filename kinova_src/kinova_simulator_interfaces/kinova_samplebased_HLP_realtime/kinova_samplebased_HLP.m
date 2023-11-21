@@ -13,7 +13,7 @@ classdef kinova_samplebased_HLP < robot_arm_graph_planner_HLP
             % Uniformly sampled nodes across workspace: uniformNodes.mat
             % Composite set of nodes: QConfig_composite.txt
             % Composite set of nodes for hardare: QConfig_composite_hardware_only.txt
-            sample_nodes = load('../kinova_simulator_interfaces/kinova_samplebased_HLP_realtime/uniformNodes.csv');
+            sample_nodes = load('../kinova_simulator_interfaces/kinova_samplebased_HLP_realtime/uniformNodes.csv');            
             % check if proper structure HLP.sample_nodes.q_valid_list
             if class(sample_nodes) == 'double'
                 sample_nodes(:,1) = wrapToPi(sample_nodes(:,1));

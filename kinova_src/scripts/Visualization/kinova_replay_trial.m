@@ -3,12 +3,12 @@ clear all;
 close all;
 
 % filename = 'trial_scene_059_.mat';
-filename = ['TestNewCost_FixedGoal_v3.mat'];
+filename = ['trial_scene_010_003.csv.mat'];
 
 verbosity = 0 ;
 dimension = 3 ;
 
-plot_start_and_end_config_only = false; % otherwise, animate trial.
+plot_start_and_end_config_only = true; % otherwise, animate trial.
 
 %% automated from here
 load(filename)
@@ -23,7 +23,7 @@ start = summary.start ;
 goal = summary.goal ;
 
 % agent just for visualizing, parameters may differ
-agent_urdf = 'Kinova_Grasp_w_Tray_Grey.urdf';
+agent_urdf = 'Kinova_Grasp_Cylinder_Edge.urdf';
 robot = importrobot(agent_urdf);
 robot.DataFormat = 'col';
 robot.Gravity = [0 0 -9.81];

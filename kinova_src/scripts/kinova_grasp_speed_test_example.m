@@ -62,7 +62,7 @@ Kr = 4.0;
 %%% for HLP
 % default is a straight-line planner
 if_use_RRT = false; % use an RRT HLP
-if_use_graph_HLP = false; % use a graph HLP
+if_use_graph_HLP = false; % use a graph HLP (switch to graph example file to use)
 % for RRT
 HLP_grow_tree_mode = 'new' ; % pick 'new' or 'keep'
 plot_waypoint_flag = true ;
@@ -241,9 +241,6 @@ if if_use_RRT
                                                'plot_waypoint_arm_flag',plot_waypoint_arm_flag,...
                                                'grow_tree_mode',HLP_grow_tree_mode,...
                                                'buffer',0.1) ;
-elseif if_use_graph_HLP
-    % need to verify this works
-    P.HLP = robot_arm_graph_planner_HLP(A,W);
 end
 
 % set up world using arm

@@ -7,7 +7,7 @@ p.links_with_uncertainty = {};
 p.true_mass_range = [1.01, 1.01]; % make sure first and second column are equal... note that if add_uncertainty_to = 'link', only changes the params of that link!
 p.true_com_range = [1, 1];
 p.uncertain_mass_range = [0.97, 1.03];
-p.specific_uncertain_mass_range = zeros(7,2);
+p.specific_uncertain_mass_range = [];
 p.uncertain_com_range  = [1, 1]; % default
 p.track_inertial_generators = false;
 p.zono_order = 40;

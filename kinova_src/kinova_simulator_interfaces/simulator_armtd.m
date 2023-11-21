@@ -14,6 +14,7 @@ classdef simulator_armtd < simulator
         stop_sim_when_input_exceeded = false;
         stop_sim_when_ultimate_bound_exceeded = false;
         stop_sim_when_joint_limit_exceeded = false;
+        stop_sim_when_grasp_check_violated = false;
     end
 
 %% methods
@@ -271,6 +272,21 @@ classdef simulator_armtd < simulator
                         
                         if joint_limit_check && S.stop_sim_when_joint_limit_exceeded
                             S.vdisp('Joint limit exceeded!',2) ;
+                            break
+                        end
+
+                        if grasp_separation_check && S.stop_sim_when_grasp_check_violated
+                            S.vdisp('Grasp Separation Check Violated',2)
+                            break
+                        end
+
+                        if grasp_slipping_check && S.stop_sim_when_grasp_check_violated
+                            S.vdisp('Grasp Slipping Check Violated',2)
+                            break
+                        end
+
+                        if grasp_tipping_check && S.stop_sim_when_grasp_check_violated
+                            S.vdisp('Grasp Tipping Check Violated',2)
                             break
                         end
 

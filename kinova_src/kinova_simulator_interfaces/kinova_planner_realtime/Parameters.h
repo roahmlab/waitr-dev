@@ -5,8 +5,8 @@
 // #include "KinovaInfo.h"
 // #include "KinovaWithoutGripperInfo.h"
 // #include "KinovaForceInfo.h"
-// #include "KinovaFixedGripperInfo.h"
-#include "KinovaForceHardwareInfo.h"
+#include "KinovaFixedGripperInfo.h"
+// #include "KinovaForceHardwareInfo.h"
 
 // #define DEBUG_MODE true
 
@@ -19,14 +19,14 @@
     #define DURATION 2.0
 
     // number of time steps (This should be an EVEN number!!!)
-    #define NUM_TIME_STEPS 40
+    #define NUM_TIME_STEPS 128
 
     // range of parameters (size of generators in PZ).
-    const double k_range[NUM_FACTORS] = { M_PI / 12, M_PI / 12, M_PI / 72, M_PI / 72, M_PI / 72, M_PI / 12, M_PI / 72 }; // (radian)
+    const double k_range[NUM_FACTORS] = { M_PI / 72, M_PI / 72, M_PI / 72, M_PI / 72, M_PI / 72, M_PI / 72, M_PI / 72 }; // (radian)
 
 // Parameters for CollisionChecking.h:
     // maximum number of obstacles (used for memory pre-allocation)
-    #define MAX_OBSTACLE_NUM 6
+    #define MAX_OBSTACLE_NUM 10
 
     // number of generators of obstacle zonotopes
     #define MAX_OBSTACLE_GENERATOR_NUM 3
@@ -35,7 +35,7 @@
     // number of threads to parallelize in CPU
     // As a rule of thumb, you SHOULD NOT need to exceed the number of available processors in your system!!!
     // In Linux, run nproc in command line to find out number of processors
-    #define NUM_THREADS 20
+    #define NUM_THREADS 32
 
     // threshold for collision avoidance constraint considered to be violated (unit: meter)
     #define COLLISION_AVOIDANCE_CONSTRAINT_VIOLATION_THRESHOLD 1e-4
@@ -60,6 +60,9 @@
 
     // scale the cost function value so that it could converge faster (be careful with it!)
     #define COST_FUNCTION_OPTIMALITY_SCALE 10.0
+
+    // whether or not to turn off input constraints
+    #define TURN_OFF_INPUT_CONSTRAINTS false
 
 // Parameters for rtd_force_Main_v2.cpp
     #define IPOPT_OPTIMIZATION_TOLERANCE 1e-4
