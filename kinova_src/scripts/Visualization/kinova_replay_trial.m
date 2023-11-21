@@ -8,7 +8,7 @@ filename = ['pi32_trial_scene_010_008.csv.mat'];
 verbosity = 0 ;
 dimension = 3 ;
 
-plot_start_and_end_config_only = false; % otherwise, animate trial.
+plot_start_and_end_config_only = true; % otherwise, animate trial.
 
 %% automated from here
 load(filename)

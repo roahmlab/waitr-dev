@@ -3,7 +3,7 @@
 
 #include "PZsparse.h"
 
-double SIMPLIFY_THRESHOLD = 1e-6;
+double SIMPLIFY_THRESHOLD = 2e-4;
 
 /*
 Helper functions

@@ -17,12 +17,12 @@ close all; clear; clc;
 
 %% user parameters
 
-u_s = 0.609382421; 
+u_s = 0.6; 
 surf_rad =  0.058 / 2;
+
 grasp_constraint_flag = true;
-
+stop_sim_when_grasp_check_violated = true;
 use_robust_input = true;
-
 use_cuda_flag = true;
 
 goal_type = 'configuration'; % pick 'end_effector_location' or 'configuration'
@@ -42,7 +42,7 @@ input_constraints_flag = true;
 save_FO_zono_flag = false;
 
 %%% for agent
-agent_urdf = 'Kinova_Grasp_URDF.urdf';
+agent_urdf = 'Kinova_Grasp_Cylinder_Edge.urdf';
 
 % RTD-Force Experiment 1: no uncertainty
 % RTD-Force Experiment 2: no uncertainty
@@ -61,7 +61,7 @@ measurement_noise_size_ = 0;
 LLC_V_max = 1e-2;
 use_true_params_for_robust = false;
 if_use_mex_controller = true;
-alpha_constant = 1;
+alpha_constant = 10;
 Kr = 5;
 
 %%% for HLP
@@ -76,19 +76,22 @@ plot_while_running = false ;
 
 % simulation
 max_sim_time = 86400 ; % 24 hours = 86400 sec; 48 hours = sec
-max_sim_iter = 2000 ;
-stop_threshold = 6 ; % number of failed iterations before exiting
+max_sim_iter = 600 ;
+stop_threshold = 4 ; % number of failed iterations before exiting
 
 % file handling
 save_file_header = 'trial_' ;
-file_location = '../results/rtd-force/dur2s_largeStateBuffer_10Obs_03082023' ;
+file_location = '../results/rtd-force/k1234567_pi72_10Obs_11102023_ARMOUR_SLP' ;
 if ~exist(file_location, 'dir')
     mkdir(file_location);
 end
 
 % world file
 world_file_header = 'scene';
-world_file_folder = '../saved_worlds/rtd-force/dur2s_largeStateBuffer_noObs_03052023/';
+% no obstacles
+% world_file_folder = '../saved_worlds/rtd-force/dur2s_largeStateBuffer_noObs_03052023/';
+% 10 obstacles
+world_file_folder = '../saved_worlds/rtd-force/dur2s_largeStateBuffer_10Obs_03082023/';
 world_file_location = sprintf('%s*%s*', world_file_folder, world_file_header);
 world_file_list = dir(world_file_location);
 
@@ -190,7 +193,8 @@ for idx = 1:length(world_file_list)
                         'allow_replan_errors',allow_replan_errors,...
                         'max_sim_time',max_sim_time,...
                         'max_sim_iterations',max_sim_iter,...
-                        'stop_sim_when_ultimate_bound_exceeded', use_robust_input) ; 
+                        'stop_sim_when_ultimate_bound_exceeded', use_robust_input,...
+                        'stop_sim_when_grasp_check_violated',stop_sim_when_grasp_check_violated) ; 
     
     % %% plotting
     if plot_while_running

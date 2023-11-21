@@ -17,7 +17,7 @@ close all; clear; clc;
 
 %% user parameters
 
-u_s = 0.609382421; 
+u_s = 0.6; 
 surf_rad =  0.058 / 2;
 grasp_constraint_flag = true;
 
@@ -37,10 +37,10 @@ allow_replan_errors = true ;
 first_iter_pause_flag = false;
 use_q_plan_for_cost = false; % otherwise use q_stop (q at final time)
 input_constraints_flag = true;
-save_FO_zono_flag = true;
+save_FO_zono_flag = false;
 
 %%% for agent
-agent_urdf = 'Kinova_Grasp_URDF.urdf';
+agent_urdf = 'Kinova_Grasp_Cylinder_Edge.urdf';
 
 % RTD-Force Experiment 1: no uncertainty
 % RTD-Force Experiment 2: no uncertainty
@@ -59,7 +59,7 @@ measurement_noise_size_ = 0;
 LLC_V_max = 1e-2;
 use_true_params_for_robust = false;
 if_use_mex_controller = true;
-alpha_constant = 1;
+alpha_constant = 10;
 Kr = 5;
 
 %%% for HLP
@@ -68,19 +68,21 @@ HLP_grow_tree_mode = 'new' ;
 plot_waypoint_flag = true ;
 plot_waypoint_arm_flag  = true ;
 lookahead_distance = 0.1 ;
+use_graph_planner = 1;
+use_SLP = 0;
 
 % plotting
 plot_while_running = false ;
 
 % simulation
 max_sim_time = 86400 ; % 24 hours = 86400 sec; 48 hours = sec
-max_sim_iter = 1000 ;
-stop_threshold = 3 ; % number of failed iterations before exiting
+max_sim_iter = 600 ;
+stop_threshold = 4 ; % number of failed iterations before exiting
 
 % file handling
 save_file_header = 'trial_' ;
 % file_location = '../results/rtd-force/dur2s_largeStateBuffer_10Obs_03082023_graph' ;
-file_location = '../results/rtd-force/dur2s_largeStateBuffer_10Obs_03082023_graph_armour' ;
+file_location = '../results/rtd-force/k123_pi32_k4567_pi72_nt128_10Obs_11152023_fixed_graph' ;
 if ~exist(file_location, 'dir')
     mkdir(file_location);
 end
@@ -165,7 +167,9 @@ for idx = 1:length(world_file_list)
                        'use_cuda', use_cuda_flag,...
                        'save_FO_zono_flag', save_FO_zono_flag,...
                        'DURATION',DURATION, ...
+                       'use_graph_planner',use_graph_planner,...
                        'lookahead_distance',lookahead_distance, ...
+                       'use_SLP',use_SLP,...
                        'plot_HLP_flag', true) ; % _wrapper
 
     P.HLP = kinova_samplebased_HLP();
