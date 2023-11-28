@@ -83,7 +83,7 @@ Section I:
 
     double t_plan = 0.5*DURATION; // optimize the distance between q_des and the desired trajectories at t_plan
     // Kinova Hardware Demo Values: u_s = 0.609382421; surf_rad =  0.058/2;
-    double u_s = 0.6; // 0.4114; // 0.609382421; // 0.5; // static coefficient of friction between tray and object
+    double u_s = 0.7; // 0.4114; // 0.609382421; // 0.5; // static coefficient of friction between tray and object
     double surf_rad =  0.0685 / 2; // 0.0762; // RADIUS of contact area between tray and object (area assumed to be circular) 
     // Note: might want to change this to be input to the C++ code from matlab?
     
