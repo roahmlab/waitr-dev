@@ -111,6 +111,15 @@ The parameterized trajectories rely on a parameter \\(\eta_{j,1}\\) which encode
 Changing this parameter affects the joint velocity and joint acceleration.
 A larger range of \\(\eta_{j,1}\\) means that the range of possible joint velocities and joint accelerations are all larger.
 
+The following table reports the results of 100 simulation trials for four different ranges of \\(\eta_{j,1}\\).
+The average planning time is the average time to find a solution per planning iteration. 
+Note that WAITR requires a new solution within one second.
+The joint speed in degrees per second \\((^{\circ}/s)\\) is reported, as well as the percent increase for settings 2-4 compared with setting 1.
+* For setting 1, the range of \\(\eta_{j,1}=\frac{\pi}{72}\\) for all joints. 
+* For setting 2, the range of \\(\eta_{j,1}=\frac{\pi}{48}\\) for all joints. 
+* For setting 3, the range of \\(\eta_{j,1}=\frac{\pi}{32}\\) for the first three joints, starting from the base joint, and \\(\eta_{j,1}=\frac{\pi}{72}\\) for the last for joints. 
+* For setting 4, the range of \\(\eta_{j,1}=\frac{\pi}{32}\\) for all joints. 
+
 | \\(\eta_{j,1}\\) Setting         | 1     | 2                  | 3                  | 4                   |
 | :------------------------------: | :---: | :----------------: | :----------------: | :-----------------: |
 | Goals Reached                    | 91    | 82                 | 80                 | 59                  |
@@ -123,15 +132,6 @@ A larger range of \\(\eta_{j,1}\\) means that the range of possible joint veloci
 | Joint 5 Speed \\((^{\circ}/s)\\) | 0\.79 | 1\.04 \\((33\%)\\) | 0\.86 \\((9\%)\\)  | 1\.52 \\((93\%)\\)  |
 | Joint 6 Speed \\((^{\circ}/s)\\) | 0\.85 | 1\.12 \\((32\%)\\) | 0\.93 \\((10\%)\\) | 1\.77 \\((109\%)\\) |
 | Joint 7 Speed \\((^{\circ}/s)\\) | 0\.77 | 1\.06 \\((35\%)\\) | 0\.89 \\((13\%)\\) | 1\.53 \\((95\%)\\)  |
-
-Results of 100 simulation trials for four different ranges of \\(\eta_{j,1}\\).
-The average planning time is the average time to find a solution per planning iteration. 
-Note that WAITR requires a new solution within one second.
-The joint speed in degrees per second \\((^{\circ}/s)\\) is reported, as well as the percent increase for settings 2-4 compared with setting 1.
-For setting 1, the range of \\(\eta_{j,1}=\frac{\pi}{72}\\) for all joints. 
-For setting 2, the range of \\(\eta_{j,1}=\frac{\pi}{48}\\) for all joints. 
-For setting 3, the range of \\(\eta_{j,1}=\frac{\pi}{32}\\) for the first three joints, starting from the base joint, and \\(\eta_{j,1}=\frac{\pi}{72}\\) for the last for joints. 
-For setting 4, the range of \\(\eta_{j,1}=\frac{\pi}{32}\\) for all joints. 
 
 The trajectory parameter simulation experiment illustrates the sensitivity of WAITR on the trajectory parameterization.
 The results show that as the range of \\(\eta_{j,1}\\) increases, the speed of the joints increases, but the computation time per planning iteration also increases because the size of the decision variable space also increases.
@@ -147,8 +147,8 @@ Therefore, the parameter \\(\eta_{j,1}\\) must be tuned to ensure desired result
 
 <div markdown="1" class="content-block grey justify no-pre">
 
-This video is another scenario where a fetch robot is used to manipulate a block. A pybullet environment is used, which allows the block to be dropped into place on the tray and have the pybullet physics engine simulate the interaction between the block and tray throughout the trajectory. The 
-Example of a failure due to contact constrainsts being turned off:
+This video is another scenario where a fetch robot is used to manipulate a block. A pybullet environment is used, which allows the block to be dropped into place on the tray and have the pybullet physics engine simulate the interaction between the block and tray throughout the trajectory. 
+The example of a failure is due to the contact constrainsts being turned off:
 <iframe style="aspect-ratio: 16/9; height: 100%; width: 100%;" src="https://www.youtube.com/embed/8r16CsglxLg?si=kxZf8YNiGaLTg9rC" title="WAITR Simulation Trial" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 </div>
