@@ -59,7 +59,7 @@ links:
 
 # Overview Video
 <div class="fullwidth">
-<iframe style="aspect-ratio: 16/9; height: 100%; width: 100%;" src="https://www.youtube.com/embed/-n6SwmylyX4" title="Serving Time: Real-Time, Safe Motion Planning and Control for Manipulation of Unsecured Objects" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe style="aspect-ratio: 16/9; width: 100%;" src="https://www.youtube.com/embed/Vz8tWRJMNwQ?si=SogKboQVydX-D-HP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
 
 # Abstract
@@ -92,16 +92,65 @@ Parts c)-e) show the contact constraints enforced during a hardware experiment f
 # Simulation Results
 <div markdown="1" class="content-block grey justify no-pre">
 
-This video is a simulation trial performed to test WAITR against ARMOUR and is one of the results reported in Tab. 2 of the paper. 
-<div class="fullwidth">
-<iframe style="aspect-ratio: 16/9; height: 100%; width: 100%;" src="https://www.youtube.com/embed/FHla5Lob5WU?si=3Z9s9nVwl274MF7u" title="WAITR Simulation Trial" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+This video is a simulation trial performed to test WAITR against ARMOUR while manipulating a small cylinder and is one of the results reported in Tab. 2 of the paper. 
+<iframe style="aspect-ratio: 16/9; width: 100%;" src="https://www.youtube.com/embed/0j_CBmOsnjA?si=Gv-bI8A35hj_oRTi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 </div>
+
+<div markdown="1" class="content-block grey justify no-pre">
+
+This video is a simulation trial performed to test WAITR against ARMOUR while manipulating a tall champagne glass and is one of the results reported in Tab. 2 of the paper. 
+<iframe style="aspect-ratio: 16/9; width: 100%;" src="https://www.youtube.com/embed/ayh8_JZVhpo?si=yzxgGrYPUrP1Ti1b" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+</div>
+
+<div markdown="1" class="content-block grey justify no-pre">
+
+This video is a set of simulation trials performed to test the effect of trajectory parameters on the performance of WAITR. 
+The parameterized trajectories rely on a parameter \\(\eta_{j,1}\\) which encodes the range of possible final joint positions of the robot at the end of a planning iteration.
+Changing this parameter affects the joint velocity and joint acceleration.
+A larger range of \\(\eta_{j,1}\\) means that the range of possible joint velocities and joint accelerations are all larger.
+
+| \\(\eta_{j,1}\\) Setting         | 1     | 2                  | 3                  | 4                   |
+| :------------------------------: | :---: | :----------------: | :----------------: | :-----------------: |
+| Goals Reached                    | 91    | 82                 | 80                 | 59                  |
+| Safe Stops                       | 9     | 18                 | 20                 | 41                  |
+| Avg. Plan Time (s)               | 0\.50 | 0\.93              | 0\.98              | 0\.99               |
+| Joint 1 Speed \\((^{\circ}/s)\\) | 0\.81 | 1\.05 \\((30\%)\\) | 1\.22 \\((50\%)\\) | 1\.87 \\((130\%)\\) |
+| Joint 2 Speed \\((^{\circ}/s)\\) | 0\.87 | 1\.12 \\((30\%)\\) | 1\.25 \\((44\%)\\) | 1\.89 \\((118\%)\\) |
+| Joint 3 Speed \\((^{\circ}/s)\\) | 0\.68 | 0\.85 \\((25\%)\\) | 0\.92 \\((34\%)\\) | 1\.41 \\((107\%)\\) |
+| Joint 4 Speed \\((^{\circ}/s)\\) | 0\.85 | 1\.10 \\((29\%)\\) | 0\.93 \\((9\%)\\)  | 1\.81 \\((112\%)\\) |
+| Joint 5 Speed \\((^{\circ}/s)\\) | 0\.79 | 1\.04 \\((33\%)\\) | 0\.86 \\((9\%)\\)  | 1\.52 \\((93\%)\\)  |
+| Joint 6 Speed \\((^{\circ}/s)\\) | 0\.85 | 1\.12 \\((32\%)\\) | 0\.93 \\((10\%)\\) | 1\.77 \\((109\%)\\) |
+| Joint 7 Speed \\((^{\circ}/s)\\) | 0\.77 | 1\.06 \\((35\%)\\) | 0\.89 \\((13\%)\\) | 1\.53 \\((95\%)\\)  |
+
+Results of 100 simulation trials for four different ranges of \\(\eta_{j,1}\\).
+The average planning time is the average time to find a solution per planning iteration. 
+Note that WAITR requires a new solution within one second.
+The joint speed in degrees per second \\((^{\circ}/s)\\) is reported, as well as the percent increase for settings 2-4 compared with setting 1.
+For setting 1, the range of \\(\eta_{j,1}=\frac{\pi}{72}\\) for all joints. 
+For setting 2, the range of \\(\eta_{j,1}=\frac{\pi}{48}\\) for all joints. 
+For setting 3, the range of \\(\eta_{j,1}=\frac{\pi}{32}\\) for the first three joints, starting from the base joint, and \\(\eta_{j,1}=\frac{\pi}{72}\\) for the last for joints. 
+For setting 4, the range of \\(\eta_{j,1}=\frac{\pi}{32}\\) for all joints. 
+
+The trajectory parameter simulation experiment illustrates the sensitivity of WAITR on the trajectory parameterization.
+The results show that as the range of \\(\eta_{j,1}\\) increases, the speed of the joints increases, but the computation time per planning iteration also increases because the size of the decision variable space also increases.
+We would like to highlight the allotted planning time for WAITR is one second, and if the planning time exceeds that, a brake maneuver is executed because a new trajectory has not been found in time.
+The manipulator system is allowed to plan for the next trajectory and can continue moving if one is successfully found.
+However, if a new trajectory cannot be found for 5 iterations in a row, we call this a safe stop. 
+Due to the average planning time increasing with an increase in the range of \\(\eta_{j,1}\\), the number of safe stops increases as well.
+Therefore, the parameter \\(\eta_{j,1}\\) must be tuned to ensure desired results, such as decreasing the number of safe stops or moving faster.
+
+<iframe style="aspect-ratio: 16/9; width: 100%;" src="https://www.youtube.com/embed/W48-rcaLXNY?si=ZQO996sz6-63o0DS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+</div>
+
+<div markdown="1" class="content-block grey justify no-pre">
 
 This video is another scenario where a fetch robot is used to manipulate a block. A pybullet environment is used, which allows the block to be dropped into place on the tray and have the pybullet physics engine simulate the interaction between the block and tray throughout the trajectory. The 
 Example of a failure due to contact constrainsts being turned off:
-<div class="fullwidth">
 <iframe style="aspect-ratio: 16/9; height: 100%; width: 100%;" src="https://www.youtube.com/embed/8r16CsglxLg?si=kxZf8YNiGaLTg9rC" title="WAITR Simulation Trial" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-</div>
+
 </div>
 
 ---
@@ -112,9 +161,7 @@ Example of a failure due to contact constrainsts being turned off:
 The overview video above shows the hardware experiments that are referenced in the paper. 
 
 This video is another scenario where the robot uses a straight-line high level planner which selects waypoints along a straight line in joint space between the current configuration and the goal. The first part shows an example of a failure due to contact constrainsts being turned off, then it shows a success when contact constraints are turned on. Both scenarios use the same global start and goal, as well as the same straight line high level planner.
-<div class="fullwidth">
 <iframe style="aspect-ratio: 16/9; height: 100%; width: 100%;" src="https://www.youtube.com/embed/_JzhxYgtu0w?si=laS-QZk0Ha4dhOBz" title="WAITR Hardware Comparison with ARMOUR" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-</div>
 
 
 
