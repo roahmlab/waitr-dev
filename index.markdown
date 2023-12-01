@@ -111,6 +111,8 @@ The parameterized trajectories rely on a parameter \\(\eta_{j,1}\\) which encode
 Changing this parameter affects the joint velocity and joint acceleration.
 A larger range of \\(\eta_{j,1}\\) means that the range of possible joint velocities and joint accelerations are all larger.
 
+<iframe style="aspect-ratio: 16/9; width: 100%;" src="https://www.youtube.com/embed/W48-rcaLXNY?si=ZQO996sz6-63o0DS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 The following table reports the results of 100 simulation trials for four different ranges of \\(\eta_{j,1}\\).
 The average planning time is the average time to find a solution per planning iteration. 
 Note that WAITR requires a new solution within one second.
@@ -140,8 +142,6 @@ The manipulator system is allowed to plan for the next trajectory and can contin
 However, if a new trajectory cannot be found for 5 iterations in a row, we call this a safe stop. 
 Due to the average planning time increasing with an increase in the range of \\(\eta_{j,1}\\), the number of safe stops increases as well.
 Therefore, the parameter \\(\eta_{j,1}\\) must be tuned to ensure desired results, such as decreasing the number of safe stops or moving faster.
-
-<iframe style="aspect-ratio: 16/9; width: 100%;" src="https://www.youtube.com/embed/W48-rcaLXNY?si=ZQO996sz6-63o0DS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 </div>
 
