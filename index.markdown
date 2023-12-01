@@ -122,7 +122,6 @@ The joint speed in degrees per second \\((^{\circ}/s)\\) is reported, as well as
 * For setting 3, the range of \\(\eta_{j,1}=\frac{\pi}{32}\\) for the first three joints, starting from the base joint, and \\(\eta_{j,1}=\frac{\pi}{72}\\) for the last for joints. 
 * For setting 4, the range of \\(\eta_{j,1}=\frac{\pi}{32}\\) for all joints.
 
-<p style="text-align: center; font-size:1.2em; font-weight:bold; margin-bottom:0;" markdown="1">Results of 100 simulation trials for four different ranges of \\(\eta_{j,1}\\)</p>
 | \\(\eta_{j,1}\\) Setting         | 1     | 2                  | 3                  | 4                   |
 | :------------------------------: | :---: | :----------------: | :----------------: | :-----------------: |
 | Goals Reached                    | 91    | 82                 | 80                 | 59                  |
