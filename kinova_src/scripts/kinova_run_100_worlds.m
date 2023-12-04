@@ -17,11 +17,11 @@ close all; clear; clc;
 
 %% user parameters
 
-u_s = 0.6; 
-surf_rad =  0.058 / 2;
-
+u_s = 0.7; 
+surf_rad =  0.0685 / 2;
 grasp_constraint_flag = true;
 stop_sim_when_grasp_check_violated = true;
+
 use_robust_input = true;
 use_cuda_flag = true;
 
@@ -42,7 +42,7 @@ input_constraints_flag = true;
 save_FO_zono_flag = false;
 
 %%% for agent
-agent_urdf = 'Kinova_Grasp_Cylinder_Edge.urdf';
+agent_urdf = 'Kinova_Grasp_Champagne_Edge.urdf';
 
 % RTD-Force Experiment 1: no uncertainty
 % RTD-Force Experiment 2: no uncertainty
@@ -81,7 +81,7 @@ stop_threshold = 4 ; % number of failed iterations before exiting
 
 % file handling
 save_file_header = 'trial_' ;
-file_location = '../results/rtd-force/k1234567_pi72_10Obs_11102023_ARMOUR_SLP' ;
+file_location = '../results/rtd-force/k1234567_pi72_10Obs_11282023_champagne_SLP_original' ;
 if ~exist(file_location, 'dir')
     mkdir(file_location);
 end

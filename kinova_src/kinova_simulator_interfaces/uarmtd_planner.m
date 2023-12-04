@@ -170,7 +170,7 @@ classdef uarmtd_planner < robot_arm_generic_planner
 
                 %%%%% This one
                 if strcmp(P.traj_type, 'bernstein')
-                    P.jrs_info.n_t = 60;
+                    P.jrs_info.n_t = 128;
                     P.jrs_info.n_q = 7;
                     P.jrs_info.n_k = 7;
                     P.jrs_info.c_k_bernstein = zeros(7,1);
@@ -179,7 +179,7 @@ classdef uarmtd_planner < robot_arm_generic_planner
                     % cuda-dev/PZsparse-Bernstein/Trajectory.h 
                     % !!!!!!
                     fprintf('Setting k_range in uarmtd_planner \n');
-                    P.jrs_info.g_k_bernstein = [pi/60; pi/60; pi/60; pi/60; pi/60; pi/60; pi/60];
+                    P.jrs_info.g_k_bernstein = [pi/72; pi/72; pi/72; pi/72; pi/72; pi/72; pi/72];
 %                     P.jrs_info.g_k_bernstein = pi/32*ones(P.jrs_info.n_q, 1);
 
                     if P.use_graph_planner

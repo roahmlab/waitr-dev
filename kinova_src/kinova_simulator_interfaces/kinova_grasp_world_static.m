@@ -350,6 +350,8 @@ classdef kinova_grasp_world_static < world
 
                     q_lower = W.arm_joint_state_limits(1,:)+.1; % + 0.01; % tighten the bounds to make sure valid
                     q_upper = W.arm_joint_state_limits(2,:)-.1; % + 0.01; % tighten the bounds to make sure valid
+
+
                     for i = 1:length(q)
 %                         test = append(num2str(q_lower(i)),' ',num2str(q(i)),' ',num2str(q_upper(i)));
 %                         disp(test)
@@ -562,15 +564,17 @@ classdef kinova_grasp_world_static < world
             % ZMP_Moment = n(:,10) + cross([0;0;cup_height],f(:,10));
             
             sep = -1*fz; %fz; %
-            slip = sqrt(fx^2+fy^2) - W.u_s*abs(fz) + 0.65; % offset to make initial/goal closer to horizontal
+            slip = sqrt(fx^2+fy^2) - W.u_s*abs(fz) + 3.25; % offset to make initial/goal closer to horizontal
             ZMP = cross([0;0;1],n(:,10))./dot([0;0;1],f(:,10));
 %             ZMP = cross(ZMP_Moment,[0;0;1])./dot([0;0;1],f(:,10)); % RNEA
 %             passes out the force and moment at the joint so original ZMP
 %             was correct
-            tip = sqrt(ZMP(1)^2 + ZMP(2)^2) - W.surf_rad; % + tip_threshold;
+            tip = sqrt(ZMP(1)^2 + ZMP(2)^2) - W.surf_rad; % offset to make initial/goal closer to horizontal
             
             if (sep > 0) || (slip > 0) || (tip > 0) % greater than zero is violation
                 out = true;
+            else
+                test = [];
             end            
         end
         

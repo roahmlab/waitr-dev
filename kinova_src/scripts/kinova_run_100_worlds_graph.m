@@ -17,9 +17,10 @@ close all; clear; clc;
 
 %% user parameters
 
-u_s = 0.6; 
-surf_rad =  0.058 / 2;
+u_s = 0.7; 
+surf_rad =  0.0685 / 2;
 grasp_constraint_flag = true;
+stop_sim_when_grasp_check_violated = true;
 
 use_robust_input = true;
 
@@ -76,20 +77,24 @@ plot_while_running = false ;
 
 % simulation
 max_sim_time = 86400 ; % 24 hours = 86400 sec; 48 hours = sec
-max_sim_iter = 600 ;
+max_sim_iter = 600; % 600 ;
 stop_threshold = 4 ; % number of failed iterations before exiting
 
 % file handling
 save_file_header = 'trial_' ;
 % file_location = '../results/rtd-force/dur2s_largeStateBuffer_10Obs_03082023_graph' ;
-file_location = '../results/rtd-force/k123_pi32_k4567_pi72_nt128_10Obs_11152023_fixed_graph' ;
+file_location = '../results/rtd-force/k1234567_pi72_nt128_10Obs_11302023_graphnoslp_original_WAITR' ;
 if ~exist(file_location, 'dir')
     mkdir(file_location);
 end
 
 % world file
 world_file_header = 'scene';
+% WAITR Paper Worlds with Small Cup
 world_file_folder = '../saved_worlds/rtd-force/dur2s_largeStateBuffer_10Obs_03082023/';
+% WAITR Paper Worlds with Half Champagne Glass
+% world_file_folder = '../saved_worlds/rtd-force/dur2s_largeStateBuffer_10Obs_Champagne_Second_11262023/';
+% world_file_folder = '../saved_worlds/rtd-force/WAITR_Revisions_Champagne_Worlds/';
 world_file_location = sprintf('%s*%s*', world_file_folder, world_file_header);
 world_file_list = dir(world_file_location);
 
@@ -106,7 +111,7 @@ joint_speed_limits = [-1.3963, -1.3963, -1.3963, -1.3963, -1.2218, -1.2218, -1.2
 joint_input_limits = [-56.7, -56.7, -56.7, -56.7, -29.4, -29.4, -29.4;
                        56.7,  56.7,  56.7,  56.7,  29.4,  29.4,  29.4]; % matlab doesn't import these from urdf so hard code into class
 transmision_inertia = [8.02999999999999936 11.99620246153036440 9.00254278617515169 11.58064393167063599 8.46650409179141228 8.85370693737424297 8.85873036646853151]; % matlab doesn't import these from urdf so hard code into class
-M_min_eigenvalue = 8.2998203638; % matlab doesn't import these from urdf so hard code into class
+M_min_eigenvalue = 8.00; % 8.2998203638; % matlab doesn't import these from urdf so hard code into class
 
 use_cuda_flag = true;
 
@@ -117,7 +122,7 @@ if plot_while_running
 end
 
 tic
-for idx = 1:length(world_file_list)
+for idx = 23:length(world_file_list)
     clc; 
     fprintf("THIS IS WORLD %d\n\n", idx);
 
@@ -191,7 +196,8 @@ for idx = 1:length(world_file_list)
                         'allow_replan_errors',allow_replan_errors,...
                         'max_sim_time',max_sim_time,...
                         'max_sim_iterations',max_sim_iter,...
-                        'stop_sim_when_ultimate_bound_exceeded', use_robust_input) ; 
+                        'stop_sim_when_ultimate_bound_exceeded', use_robust_input,...
+                        'stop_sim_when_grasp_check_violated',stop_sim_when_grasp_check_violated) ; 
     
     %% plotting
     if plot_while_running

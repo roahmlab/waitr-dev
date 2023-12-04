@@ -3,7 +3,7 @@ clear all;
 close all;
 
 % filename = 'trial_scene_059_.mat';
-filename = ['pi32_trial_scene_010_008.csv.mat'];
+filename = ['trial_scene_010_003.csv.mat'];
 
 verbosity = 0 ;
 dimension = 3 ;

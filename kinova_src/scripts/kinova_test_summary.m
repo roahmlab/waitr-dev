@@ -18,7 +18,7 @@ save_file_header = 'trial_' ;
 % file_location = '/home/roahmlab/Documents/armour-dev/kinova_src/results/rtd-force/dur2s_largeStateBuffer_noObs_03052023_v2_single' ;
 % file_location = '/home/roahmlab/Documents/armour-dev/kinova_src/results/rtd-force/dur2s_largeStateBuffer_10Obs_03072023' ;
 % file_location = '/home/roahmlab/Documents/armour-dev/kinova_src/results/rtd-force/dur2s_largeStateBuffer_10Obs_03082023'; % paper result
-% file_location = '/home/roahmlab/Documents/armour-dev/kinova_src/results/rtd-force/dur2s_largeStateBuffer_10Obs_03082023_graph' ;
+file_location = '/home/roahmlab/Documents/armour-dev/kinova_src/results/rtd-force/dur2s_largeStateBuffer_10Obs_03082023_graph' ;
 % file_location = '/home/roahmlab/Documents/armour-dev/kinova_src/results/rtd-force/dur2s_largeStateBuffer_10Obs_03082023_graph_armour' ;
 % file_location = 'D:\Grad School\Research\Roahm Lab\RTD Force\dur2s_largeStateBuffer_10Obs_03082023\dur2s_largeStateBuffer_10Obs_03082023';
 % file_location = 'D:\Grad School\Research\Roahm Lab\RTD Force\dur2s_largeStateBuffer_10Obs_03082023_graph\dur2s_largeStateBuffer_10Obs_03082023_graph';
@@ -30,7 +30,15 @@ save_file_header = 'trial_' ;
 % file_location = '/home/roahmlab/Documents/waitr-dev/kinova_src/results/rtd-force/k1234567_pi48_nt128_10Obs_11152023_fixed_graph' ;
 % file_location = '/home/roahmlab/Documents/waitr-dev/kinova_src/results/rtd-force/k1234567_pi32_nt128_10Obs_11152023_fixed_graph' ;
 % file_location = '/home/roahmlab/Documents/waitr-dev/kinova_src/results/rtd-force/k123_pi32_k4567_pi72_nt128_10Obs_11152023_fixed_graph';
-file_location = '/home/roahmlab/Documents/waitr-dev/kinova_src/results/rtd-force/k1234567_pi72_10Obs_11102023_ARMOUR_SLP' ;
+% file_location = '/home/roahmlab/Documents/waitr-dev/kinova_src/results/rtd-force/k1234567_pi72_10Obs_11102023_ARMOUR_SLP' ;
+% file_location = '/home/roahmlab/Documents/waitr-dev/kinova_src/results/rtd-force/k1234567_pi72_nt128_10Obs_11222023_champagne_graph';
+% file_location = '/home/roahmlab/Documents/waitr-dev/kinova_src/results/rtd-force/k1234567_pi72_nt128_10Obs_11222023_champagne_graph_ARMOUR';
+% file_location = '/home/roahmlab/Documents/waitr-dev/kinova_src/results/rtd-force/k1234567_pi72_10Obs_11102023_champagne_ARMOUR_SLP';
+% file_location = '/home/roahmlab/Documents/waitr-dev/kinova_src/results/rtd-force/k1234567_pi72_10Obs_11102023_champagne_SLP';
+% file_location = '/home/roahmlab/Documents/waitr-dev/kinova_src/results/rtd-force/k1234567_pi72_nt128_10Obs_11262023_champagne_graph_second';
+% file_location = '/home/roahmlab/Documents/waitr-dev/kinova_src/results/rtd-force/k1234567_pi72_nt128_10Obs_11272023_champagne_graph_flat_start_WAITR';
+% file_location = '/home/roahmlab/Documents/waitr-dev/kinova_src/results/rtd-force/k1234567_pi72_nt128_10Obs_11272023_champagne_graph_original_ARMOUR';
+
 
 % file_location = '../results/hard' ;
 addpath(file_location);
@@ -52,6 +60,7 @@ mean_planning_time = [];
 mean_vel = [];
 
 num_total_iterations = [];
+num_total_iterations_completed = [];
 
 for i = 1:length(summary_files)
     data = load(summary_files(i).name);
@@ -86,15 +95,19 @@ for i = 1:length(summary_files)
     end
     if data.summary.grasp_separation_check
         grasp_separation_check = [grasp_separation_check i];
+        continue;
     end
     if data.summary.grasp_slipping_check
         grasp_slipping_check = [grasp_slipping_check i];
+        continue;
     end
     if data.summary.grasp_tipping_check
         grasp_tipping_check = [grasp_tipping_check i];
+        continue;
     end
     if data.summary.goal_check
         goal_check = [goal_check, i];
+        num_total_iterations_completed = [num_total_iterations_completed data.summary.total_iterations];
         continue;
     end
 
@@ -122,6 +135,7 @@ fprintf("Number of Test Trials that violated tipping constraint: %d\n",length(gr
 fprintf("Number of Test Trials that reach the goals: %d\n", length(goal_check));
 fprintf("Number of Test Trials that do not reach the goals but stop safely: %d\n", length(infeasible_check));
 fprintf("Average number of iterations: %d\n",mean(num_total_iterations))
+fprintf("Average number of iterations for completed trials: %d\n",mean(num_total_iterations_completed))
 
 %% Velocity Processing
 mean_vel;

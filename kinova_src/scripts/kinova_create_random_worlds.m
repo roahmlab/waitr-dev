@@ -8,23 +8,23 @@
 clear ; clc ; figure(1); clf; view(3); grid on;
 
 %% user parameters
-world_save_dir = '../saved_worlds/rtd-force/dur2s_largeStateBuffer_10Obs_03082023_10';
+world_save_dir = '../saved_worlds/rtd-force/dur2s_largeStateBuffer_10Obs_Champagne_Second_11262023';
 if ~exist(world_save_dir, 'dir')
     mkdir(world_save_dir);
 end
 
-u_s = 0.609382421; 
-surf_rad =  0.058 / 2;
+u_s = 0.7; 
+surf_rad =  0.0685 / 2;
 grasp_constraint_flag = true;
 
 transmision_inertia = [8.02999999999999936 11.99620246153036440 9.00254278617515169 11.58064393167063599 8.46650409179141228 8.85370693737424297 8.85873036646853151]; % matlab doesn't import these from urdf so hard code into class
-M_min_eigenvalue = 8.29938; % matlab doesn't import these from urdf so hard code into class
+M_min_eigenvalue = 8.00; % 8.29938; % matlab doesn't import these from urdf so hard code into class
 
 obstacle_flag = 1;
 N_obstacle_min = 10 ;
 N_obstacle_max = 10 ;
 N_obstacle_delta = 1 ;
-N_worlds_per_obstacle = 10;
+N_worlds_per_obstacle = 100;
 
 dimension = 3 ;
 nLinks = 10 ;
@@ -44,7 +44,7 @@ links_with_uncertainty = {}; % if add_uncertainty_to = 'link', specify links her
 uncertain_mass_range = [0.97, 1.03];
 
 % kinova
-robot = importrobot('Kinova_Grasp_URDF.urdf');
+robot = importrobot('Kinova_Grasp_Champagne_Edge.urdf');
 robot.DataFormat = 'col';
 robot.Gravity = [0 0 -9.81];
 % model = create_model_from_urdf('Kinova_Grasp_URDF.urdf');

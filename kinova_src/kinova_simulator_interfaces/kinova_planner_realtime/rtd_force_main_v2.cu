@@ -1,4 +1,4 @@
-#include "NLPclass_ARMOUR.h"
+#include "NLPclass.h"
 #include "BufferPath.h"
 
 const std::string inputfilename = pathname + "armour.in";

@@ -333,7 +333,8 @@
   <link name="cube_link">
   <!-- updated for champagne glass -->
     <inertial>
-      <origin rpy="0 0 0" xyz="0 0 0.13773" />
+      <origin rpy="0 0 0" xyz="0 0 0.0689" />
+        <!-- the CoM of real life 0.13773 -->
       <mass value="0.604" /> 
       <inertia ixx="0.00086603273" ixy="0.0" ixz="0.0" iyy="0.00086603273" iyz="0.0" izz="0.00017386399" />
     </inertial>
