@@ -164,8 +164,6 @@ This video is another scenario where the robot uses a straight-line high level p
 
 </div>
 
-
-
 <div markdown="1" class="justify">
   
 # [Related Projects](#related-projects)
@@ -195,30 +193,3 @@ This project was developed in [Robotics and Optimization for Analysis of Human M
 </div>
 
 ---
-
-<div markdown="1" class="justify">
-  
-# [Related Projects](#related-projects)
-  
-* [Autonomous Robust Manipulation via Optimization with Uncertainty-aware Reachability](https://roahmlab.github.io/armour/)
-
-
-<div markdown="1" class="content-block grey justify">
-  
-# [Citation](#citation)
-
-This project was developed in [Robotics and Optimization for Analysis of Human Motion (ROAHM) Lab](http://www.roahmlab.com/) at University of Michigan - Ann Arbor.
-
-```bibtex
-@article{brei2024waiter,
-  author={Brei, Zachary and Michaux, Jonathan and Zhang, Bohao and Holmes, Patrick and Vasudevan, Ram},
-  journal={IEEE Robotics and Automation Letters}, 
-  title={Serving Time: Real-Time, Safe Motion Planning and Control for Manipulation of Unsecured Objects}, 
-  year={2024},
-  volume={9},
-  number={3},
-  pages={2383-2390},
-  keywords={Robots;Trajectory;Manipulators;Real-time systems;Uncertainty;Planning;Optimization;Manipulation planning;robot safety;collision avoidance},
-  doi={10.1109/LRA.2024.3355731}}
-```
-</div>
