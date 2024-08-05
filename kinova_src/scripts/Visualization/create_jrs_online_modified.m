@@ -58,8 +58,8 @@ else
     k_r = LLC_info.Kr;
 end
 
-bernstein_final_range = pi/12*ones(n_q, 1);
-% bernstein_final_range = [pi/24; pi/72; pi/24; pi/72; pi/72; pi/72; pi/72];
+% bernstein_final_range = pi/12*ones(n_q, 1);
+bernstein_final_range = [pi/24; pi/72; pi/24; pi/72; pi/72; pi/72; pi/72];
 
 t_f = 1;
 t_p = 0.5;
