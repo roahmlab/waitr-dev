@@ -681,7 +681,7 @@ set(gca,'FontSize',fontsize)
 
 %% plot trajectory 1
 if plot_trajectory_1
-    for j = 1:length(kvec)
+    for j = 1:1 % length(kvec)
         plot_idx = plot_idx + 1;
         figure(plot_idx); clf; hold on;
 
