@@ -36,3 +36,8 @@ kinova_src/kinova_simulator_interfaces/kinova_samplebased_HLP_realtime/BuildAdja
 kinova_src/results/rtd-force/
 kinova_src/scripts/adj_matrix_uniform_mult3.txt
 figures/*
+kinova_src/scripts/Visualization/CASE2024_Reachability_Figure.png
+kinova_src/scripts/Visualization/CASE2024_Reachability_Figure-01.png
+kinova_src/scripts/Visualization/Friction_Cone_3D.eps
+kinova_src/scripts/Visualization/Friction_Cone_3D.svg
+kinova_src/scripts/Visualization/untitled.eps

@@ -35,7 +35,7 @@ end
 fig_num = fig_num + 1;
 fig = figure(fig_num);
 % subplot(3,1,1)
-plot(t_cont,rad2deg(q_cont_des(1,:)),'LineWidth',2)
+plot(t_cont,rad2deg(q_cont_des(1,:)),'-k','LineWidth',2)
 % subplot(3,1,2)
 % plot(t_cont,rad2deg(qd_cont_des(1,:)))
 % subplot(3,1,3)
