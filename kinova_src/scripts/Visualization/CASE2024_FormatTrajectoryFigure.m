@@ -2,7 +2,7 @@
 % Zachary Brei
 
 % % Trajectory Visualization Figure
-ylim([0 55])
+% ylim([0 55])
 xlabel('Time (s)')
 ylabel('Joint 1 Angle (deg)')
 set(gcf,'Color','w');

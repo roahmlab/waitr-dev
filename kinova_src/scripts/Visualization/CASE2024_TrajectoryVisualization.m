@@ -6,8 +6,61 @@ close all;
 clc;
 fig_num = 0;
 
-%% Parameters
+%% Plotting Multiple Lines for Reachable Set
 
+plot_cont_reachable_set = 1;
+
+if plot_cont_reachable_set
+
+    % Initial state
+    q_0 = [pi/4; -pi/4; 0; -pi/2; 0; pi/4; 0];
+    qd_0= [-pi/4; pi/30; 0; 0; 0; 0; 0];
+    qdd_0 = [0; pi/30; 0; 0; 0; 0; 0];
+    
+    % Trajectory parameter range
+    kvec_min = -1;
+    kvec_max = 1;
+    kvec_base = [0.001; 0.48; 0.001; 0.48; 0.001; 0.48; 0.001];
+    P.bernstein_center = zeros(size(q_0));
+    P.bernstein_final_range = [pi/24; pi/72; pi/24; pi/72; pi/72; pi/72; pi/72];
+    
+    % Time vector
+    t_cont = linspace(0,1);
+    
+    % Number of different kvecs to try
+    num_trajectories = 1000;
+    
+    % Plotting setup
+    fig_num = 1; % change this number if you're using multiple figures
+    fig = figure(fig_num);
+    hold on;
+    
+    kvec_1_range = linspace(kvec_min,kvec_max,num_trajectories);
+    
+    for j = 1:num_trajectories
+        % Generate a kvec with values between -1 and 1
+    %     kvec = kvec_min + (kvec_max - kvec_min) * rand(size(q_0));
+        kvec = [kvec_1_range(j); kvec_base(2:end)];
+        
+        % Create Desired Trajectory
+        for i = 1:length(t_cont)
+            [q_cont_des(:,i), qd_cont_des(:,i), qdd_cont_des(:,i)] = desired_trajectory(P, q_0, qd_0, qdd_0, t_cont(i), kvec);
+        end
+        
+        % Plot the trajectory with grey and transparent lines
+        plot(t_cont, rad2deg(q_cont_des(1,:)), 'Color', [0.5 0.5 0.5 0.3], 'LineWidth', 2);
+    end
+    
+    % Final plot adjustments
+    xlabel('Time (s)');
+    ylabel('Joint Angle (deg)');
+    set(gcf,'Color','w');
+    fontsize(fig, 14, "points");
+
+end
+
+%% Parameters
+% 
 % Initial state
 q_0 = [pi/4;-pi/4;0;-pi/2;0;pi/4;0];
 qd_0= [-pi/4;pi/30;0;0;0;0;0];
@@ -30,9 +83,11 @@ end
 
 %% Create Overapproximation of Desired Trajectory
 
-%% Plotting
+%% Plotting Nominal Line in Black
 
-fig_num = fig_num + 1;
+if ~plot_cont_reachable_set
+    fig_num = fig_num + 1;
+end
 fig = figure(fig_num);
 % subplot(3,1,1)
 plot(t_cont,rad2deg(q_cont_des(1,:)),'-k','LineWidth',2)
@@ -83,6 +138,10 @@ fontsize(fig, 14, "points")
 % 		[R{i}{j, 1}, R_t{i}{j, 1}] = get_pz_rotations_from_q(Q{i}{j, 1}, joint_axes(:, j), taylor_degree);
 % 	end
 % end
+
+
+
+
 
 %% Helper Functions
 

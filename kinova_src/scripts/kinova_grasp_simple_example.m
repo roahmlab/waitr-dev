@@ -9,7 +9,7 @@
 initialize_script_path = matlab.desktop.editor.getActiveFilename;
 cd(initialize_script_path(1:end-29));
 
-close all; clear; clc; dbstop if error
+close all; clear; clc;
 
 delete(gcp('nocreate'))
 % parpool('threads')

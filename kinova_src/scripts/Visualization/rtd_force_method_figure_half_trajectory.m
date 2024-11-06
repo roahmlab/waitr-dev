@@ -34,8 +34,9 @@ params = load_robot_params(robot, ...
                            'uncertain_mass_range', uncertain_mass_range);
 
 % controller info
-LLC_info.ultimate_bound = 0.00191; % 0.00191
-LLC_info.Kr = 10;
+% LLC_info.ultimate_bound = 0.00191;
+LLC_info.ultimate_bound = 0.0694;
+LLC_info.Kr = 5;
 
 % create link poly zonotopes
 [link_poly_zonotopes, link_sizes, meshes] = create_link_poly_zonos(robot);
@@ -111,9 +112,13 @@ time_to_slice = 6;
 % qd_0= [-pi/3;pi/30;0;0;0;0;0];
 % qdd_0 = [0;pi/30;0;0;0;0;0];
 % Beyster App
-q_0 = [pi/4;-pi/4;0;-pi/2;0;pi/4;0];
-qd_0= [-pi/4;pi/30;0;0;0;0;0];
-qdd_0 = [0;pi/30;0;0;0;0;0];
+% q_0 = [pi/4;-pi/4;0;-pi/2;0;pi/4;0];
+% qd_0= [-pi/4;pi/30;0;0;0;0;0];
+% qdd_0 = [0;pi/30;0;0;0;0;0];
+
+q_0 = [0;-pi/2;0;0;0;0;0];
+qd_0= [0;0;0;0;0;0;0];
+qdd_0 = [0;0;0;0;0;0;0];
 
 % clf(101)
 % figure(101)
@@ -134,9 +139,9 @@ add_ultimate_bound = true;
 % kvec = [0.6; -0.8; 0.5; -0.2; -0.4; 0.35; 0.34];
 % new figure
 % kvec = [0.001; 0.5; 0.001; 0.5; 0.001; 0.5; 0.001]; % current paper value
-kvec = [0.001; 0.48; 0.001; 0.48; 0.001; 0.48; 0.001];
+% kvec = [0.001; 0.48; 0.001; 0.48; 0.001; 0.48; 0.001];
 % kvec = [-1;-1;-1;-1;-1;-1;-1];
-% kvec = [1;1;1;1;1;1;1];
+kvec = [1;1;1;1;1;1;1];
 
 %%
 
@@ -576,9 +581,10 @@ for i = 1:length(t_traj)
     f_int_convHull = convHull(f_int{i});
     f_int_zono = zonotope(f_int_convHull);
     f_int_reduce = reduce(f_int_zono,'girard',1);
+%     plot(f_int_reduce,[1,2,3],'FaceColor',unsliced_color,'FaceAlpha',0.25)
     V = vertices(f_int_reduce)';
     [V_convhull, V_slc] = convhull(V(:,1),V(:,2),V(:,3));
-    trisurf(V_convhull,V(:,1),V(:,2),V(:,3),'FaceColor',unsliced_color,'FaceAlpha',0.25,'EdgeAlpha',0.0)
+    trisurf(V_convhull,V(:,1),V(:,2),V(:,3),'FaceColor',unsliced_color,'FaceAlpha',0.25,'EdgeAlpha',0.50,'EdgeColor',unsliced_color)
 
     % plot the sliced overapproximation
     f_sliced_2 = getSubset(f_int{i},f_int{i}.id,kvec(f_int{i}.id));
@@ -587,7 +593,7 @@ for i = 1:length(t_traj)
     f_int_reduce = reduce(f_int_zono,'girard',1);
     V = vertices(f_int_reduce)';
     [V_convhull, V_slc] = convhull(V(:,1),V(:,2),V(:,3));
-    trisurf(V_convhull,V(:,1),V(:,2),V(:,3),'FaceColor',slice_color,'FaceAlpha',0.3,'EdgeAlpha',0.0)
+    trisurf(V_convhull,V(:,1),V(:,2),V(:,3),'FaceColor',slice_color,'FaceAlpha',0.3,'EdgeAlpha',0.50,'EdgeColor',slice_color)
 
     % plot the friction cone
     r = linspace(0,1,10);
@@ -599,11 +605,11 @@ for i = 1:length(t_traj)
     h1 = surf(X,Y,Z,'EdgeColor','none','FaceColor','r','FaceAlpha','0.1');
     
     
-    xlabel('x-axis Tangential Force (N)')
-    ylabel('y-axis Tangential Force (N)')
-    zlabel('z-axis Normal Force (N)')
+%     xlabel('x-axis Tangential Force (N)')
+%     ylabel('y-axis Tangential Force (N)')
+%     zlabel('z-axis Normal Force (N)')
     axis('square')
-%     grid on
+    grid on
 %     box on
     % Set axis limits to keep the plot size consistent
     xlim([-1, 1])
